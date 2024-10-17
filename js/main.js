@@ -1,6 +1,6 @@
 const maxId = 25;
 const maxLikes = 200;
-const maxComents = 30;
+const maxComments = 30;
 const message = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -40,17 +40,17 @@ function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const similarComents = Array.from({ length: getRandomInteger(1, maxComents) }, () => ({
+const similarComments = Array.from({ length: maxId}, () => ({
   id: getRandomInteger(0, maxId),
-  url: `photos/${ getRandomInteger(0, maxId) }.jpg`,
+  url: `photos/${ getRandomInteger(1, maxId) }.jpg`,
   description: description[getRandomInteger(0, description.length - 1)],
   likes: getRandomInteger(0, maxLikes),
-  comments: [{
+  comments: Array.from({ length: getRandomInteger(0, maxComments) }, () => ({
     id: getRandomInteger(0, maxId),
-    avatar: `img/avatar-${ getRandomInteger(0, 6) }.svg`,
+    avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
     name: names[getRandomInteger(0, names.length - 1)],
     message: message[getRandomInteger(0, message.length - 1)]
-  }]
+  }))
 }));
 
-console.log(similarComents);
+console.log(similarComments);
