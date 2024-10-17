@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+import{getRandomInteger} from './util.js';
 const maxId = 25;
 const maxLikes = 200;
-<<<<<<< HEAD
-const maxComents = 25;
-=======
 const maxComments = 30;
->>>>>>> 7e8b027 (решает задачу 2)
 const message = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -43,10 +37,6 @@ const description = [
   'офис'
 ];
 
-function getRandomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const similarComments = Array.from({ length: maxId}, () => ({
   id: getRandomInteger(0, maxId),
   url: `photos/${ getRandomInteger(1, maxId) }.jpg`,
@@ -60,12 +50,5 @@ const similarComments = Array.from({ length: maxId}, () => ({
   }))
 }));
 
-<<<<<<< HEAD
-console.log(similarComents);
->>>>>>> be1d220 (испр опечатку)
-=======
 console.log(similarComments);
->>>>>>> 7e8b027 (решает задачу 2)
-=======
-import './data.js';
->>>>>>> fe8a2b5 (исправляет)
+
