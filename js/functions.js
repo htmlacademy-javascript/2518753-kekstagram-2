@@ -9,8 +9,8 @@ const checkingStringLength = (line = '', maximumLength = 1) => line.length <= ma
 const isPalindrome = (line) => {
   line = line.replaceAll(' ','').toLowerCase();
   let reversedLine = '';
-  for (let i = string.length - 1; i >= 0; i--) {
-    reversedLine += string[i];
-    return string === reversedLine;
+  for (let i = line.length - 1; i >= 0; i--) {
+    reversedLine += line[i];
+    return line === reversedLine;
   }
 };
