@@ -3,9 +3,25 @@
 //  и false, если строка длиннее. Эта функция нам пригодится для валидации формы.
 //  Примеры использования функции:
 
+<<<<<<< HEAD
 const checkingStringLength = (line, maximumLength = 1) => line.length <= maximumLength;
+=======
+const checkingStringLength = (line = '', maximumLength = 1) => line.length <= maximumLength;
+>>>>>>> bb4d79b (исправляет 2ую задачу)
 // Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево
 
+<<<<<<< HEAD
+=======
+const isPalindrome = (line) => {
+  line = line.replaceAll(' ', '').toLowerCase();
+  let reversedLine = '';
+  for (let i = line.length - 1; i >= 0; i--) {
+    reversedLine += line[i];
+  }
+  return line === reversedLine;
+};
+<<<<<<< HEAD
+>>>>>>> 99b0d9e (исправляет 2ую задачу)
 
 const isPalindrome = (string) => {
   const normalizedString = string.replaceAll(' ', '').toLowerCase();
@@ -21,4 +37,10 @@ const extractDigitsToNumber = (inputString) => {
   } else {
     return NaN;
   }
+<<<<<<< HEAD
 };
+=======
+}
+=======
+>>>>>>> bb4d79b (исправляет 2ую задачу)
+>>>>>>> 99b0d9e (исправляет 2ую задачу)
