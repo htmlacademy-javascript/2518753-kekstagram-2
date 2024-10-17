@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const maxId = 25;
 const maxLikes = 200;
@@ -79,3 +80,6 @@ import './data.js';
 =======
 console.log(similarComments);
 >>>>>>> 6ed45f2 (решает задачу 2)
+=======
+import './data.js';
+>>>>>>> c2300ca (исправляет)
