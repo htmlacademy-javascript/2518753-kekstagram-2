@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const maxId = 25;
 const maxLikes = 200;
@@ -8,6 +9,11 @@ const maxComents = 25;
 =======
 const maxComments = 30;
 >>>>>>> 7e8b027 (решает задачу 2)
+=======
+const maxId = 25;
+const maxLikes = 200;
+const maxComments = 30;
+>>>>>>> 6ed45f2 (решает задачу 2)
 const message = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -61,6 +67,7 @@ const similarComments = Array.from({ length: maxId}, () => ({
 }));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 console.log(similarComents);
 >>>>>>> be1d220 (испр опечатку)
 =======
@@ -69,3 +76,6 @@ console.log(similarComments);
 =======
 import './data.js';
 >>>>>>> fe8a2b5 (исправляет)
+=======
+console.log(similarComments);
+>>>>>>> 6ed45f2 (решает задачу 2)
