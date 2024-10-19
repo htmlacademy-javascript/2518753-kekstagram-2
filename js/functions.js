@@ -3,13 +3,8 @@
 //  и false, если строка длиннее. Эта функция нам пригодится для валидации формы.
 //  Примеры использования функции:
 
-<<<<<<< HEAD
-const checkingStringLength = (line, maximumLength = 1) => line.length <= maximumLength;
-=======
-const checkingStringLength = (line = '', maximumLength = 1) => line.length <= maximumLength;
->>>>>>> bb4d79b (исправляет 2ую задачу)
-// Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -64,3 +59,5 @@ function extractDigitsToNumber (inputString) {
 =======
 >>>>>>> 7ecf576 (выполняет задание 3)
 >>>>>>> 7eab7f9 (выполняет задание 3)
+=======
+>>>>>>> 528ec13 (вносит изменения)
