@@ -40,7 +40,7 @@ function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const similarComments = Array.from({ length: getRandomInteger(1, maxComents) }, () => ({
+const similarComents = Array.from({ length: getRandomInteger(1, maxComents) }, () => ({
   id: getRandomInteger(0, maxId),
   url: `photos/${ getRandomInteger(0, maxId) }.jpg`,
   description: description[getRandomInteger(0, description.length - 1)],
@@ -53,4 +53,4 @@ const similarComments = Array.from({ length: getRandomInteger(1, maxComents) }, 
   }]
 }));
 
-console.log(similarComments);
+console.log(similarComents);
