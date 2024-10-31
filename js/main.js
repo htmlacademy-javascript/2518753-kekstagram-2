@@ -2,7 +2,7 @@
 =======
 const maxId = 25;
 const maxLikes = 200;
-const maxComents = 30;
+const maxComents = 25;
 const message = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
