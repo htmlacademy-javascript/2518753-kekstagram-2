@@ -1,6 +1,12 @@
-// Функция для проверки длины строки. Она принимает строку, которую нужно проверить, и
-//  максимальную длину и возвращает true, если строка меньше или равна указанной длине,
-//  и false, если строка длиннее. Эта функция нам пригодится для валидации формы.
-//  Примеры использования функции:
+export function isMeetingWithinWorkHours(startWork, endWork, startMeeting, duration) {
+  const timeToMinutes = (time) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return (hours * 60 + minutes);
+  };
 
-
+  const startWorkM = timeToMinutes(startWork);
+  const endWorkM = timeToMinutes(endWork);
+  const startMeetingM = timeToMinutes(startMeeting);
+  const endMeetingM = startMeetingM + duration;
+  return startMeetingM >= startWorkM && endMeetingM <= endWorkM;
+}
