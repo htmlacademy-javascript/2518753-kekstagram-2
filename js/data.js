@@ -37,7 +37,7 @@ export const description = [
   'офис'
 ];
 
-export function similarComments() {
+export function userPhotos() {
   return Array.from({ length: maxId }, () => ({
     id: getRandomInteger(0, maxId),
     url: `photos/${getRandomInteger(1, maxId)}.jpg`,
