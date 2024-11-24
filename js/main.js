@@ -1,5 +1,6 @@
 import { isMeetingWithinWorkHours } from './functions.js';
 import { similarComments } from './data.js';
+import './drawingThumbnails.js';
 const comments = similarComments();
 console.log(comments);
 
