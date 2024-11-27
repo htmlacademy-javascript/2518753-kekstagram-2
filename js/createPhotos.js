@@ -1,9 +1,10 @@
 import { userPhotos } from './data.js';
 
+
 const similar = userPhotos();
 const photoListFragment = document.createDocumentFragment();
 const template = document.querySelector('#picture');
-const picturesContainer = document.querySelector('.pictures');
+export const picturesContainer = document.querySelector('.pictures');
 
 similar.forEach(({url, description, likes, comments}) => {
   const templateClone = template.content.cloneNode(true);
@@ -15,3 +16,5 @@ similar.forEach(({url, description, likes, comments}) => {
   photoListFragment.append(templateClone);
 });
 picturesContainer.append(photoListFragment);
+
+
