@@ -3,17 +3,18 @@ import './createPhotos.js';
 
 
 const bigWindow = document.querySelector('.big-picture');
-const smallPicture = picturesContainer.querySelector('.picture__img');
+const smallPictures = picturesContainer.querySelectorAll('.picture__img');
 const pictureCloseButton = document.querySelector('#picture-cancel');
 const bigPicture = bigWindow.querySelector('.big-picture__img img');
-
+const smallPicture = picturesContainer.querySelector('.picture__img');
 
 // function changeImage(newSrc) {
 //   bigPictureImg.src = newSrc;
 // }
-function openBigPicture (){
+
+function openBigPicture (element){
   bigWindow.classList.remove('hidden');
-  bigPicture.src = smallPicture.src ;
+  bigPicture.src = element.src ;
 }
 
 
@@ -27,7 +28,10 @@ function closeBigPictureEsc(evt){
   }
 }
 
-smallPicture.addEventListener('click', () => openBigPicture());
+smallPictures.forEach((smallPicture) => {
+
+  smallPicture.addEventListener('click', () => openBigPicture(smallPicture));
+});
 pictureCloseButton.addEventListener('click',closeBigPicture);
 document.addEventListener('keydown', closeBigPictureEsc);
 
