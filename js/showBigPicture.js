@@ -8,8 +8,8 @@ const pictureCloseButton = document.querySelector('#picture-cancel');
 const bigPicture = bigWindow.querySelector('.big-picture__img img');
 const bigPictureSocial = document.querySelector('.social__header');
 const socialComment = document.querySelector('.social__comments');
-const likesCounts = document.querySelector('.likes-count');
-const likesElements = document.querySelector('.picture__likes');
+const likesCounts = document.querySelectorAll('.likes-count');
+const likesElements = document.querySelectorAll('.picture__likes');
 
 
 function openBigPicture (element){
@@ -35,9 +35,14 @@ function likesCountFunction(likesCount,likesElement){
 smallPictures.forEach((smallPicture) => {
 
   smallPicture.addEventListener('click', () => openBigPicture(smallPicture));
-  likesCounts.textContent = likesElements.textContent;
+
 });
 
+
+likesElements.forEach((likesElement) => {
+  likesCountFunction(likesCounts,likesElement);
+  console.log(likesCounts,likesElement);
+});
 
 pictureCloseButton.addEventListener('click',closeBigPicture);
 document.addEventListener('keydown', closeBigPictureEsc);
