@@ -1,21 +1,10 @@
-import {picturesContainer} from'./createPhotos';
-import './createPhotos.js';
-import './data.js';
-
 const bigWindow = document.querySelector('.big-picture');
-const smallPictures = picturesContainer.querySelectorAll('.picture__img');
-const pictureCloseButton = document.querySelector('#picture-cancel');
-const bigPicture = bigWindow.querySelector('.big-picture__img img');
-const bigPictureSocial = document.querySelector('.social__header');
-const socialComment = document.querySelector('.social__comments');
-const likesCounts = document.querySelectorAll('.likes-count');
-const likesElements = document.querySelectorAll('.picture__likes');
-
-
-function openBigPicture (element){
-  bigWindow.classList.remove('hidden');
-  bigPicture.src = element.src ;
-}
+const bigWindowImg = document.querySelector('.big-picture__img img');
+const bigWindowLikes = document.querySelector('.likes-count');
+const btnWindowCancel = bigWindow.querySelector('.big-picture__cancel');
+const bigWindowTotalComment = document.querySelector('.social__comment-total-count');
+const bigWindowCountComment = document.querySelector('.social__comment-count');
+const bigWindowComments = bigWindow.querySelector('.social__comments');
 
 function closeBigPicture(){
   bigWindow.classList.add('hidden');
@@ -23,29 +12,32 @@ function closeBigPicture(){
 
 function closeBigPictureEsc(evt){
   if(evt.key === 'Escape'){
-    bigWindow.classList.add('hidden');
+    closeBigPicture();
   }
 }
 
-function likesCountFunction(likesCount,likesElement){
-  likesCount.textContent = likesElement.textContent;
-}
+export const showBigPicture = ({url, description, likes, comments})=>{
+  bigWindow.classList.remove('hidden');
+  bigWindowCountComment.classList.add('hidden');
+  bigWindowComments.innerHTML = '';
+  bigWindowImg.src = url;
+  bigWindowLikes.textContent = likes;
+  bigWindowTotalComment.textContent = comments.length;
+  console.log(comments);
 
+  comments.forEach(({id, avatar, name, message}) => {
+    bigWindowComments.insertAdjacentHTML('afterbegin',`
+        <li class="social__comment" id="comment-${id}">
+          <img
+            class="social__picture"
+            src="${avatar}"
+            alt="${name}"
+            width="35" height="35">
+          <p class="social__text">${message}</p>
+        </li>
+      `);
+  });
+  btnWindowCancel.addEventListener('click', closeBigPicture);
+  document.addEventListener('keydown', closeBigPictureEsc);
 
-smallPictures.forEach((smallPicture) => {
-
-  smallPicture.addEventListener('click', () => openBigPicture(smallPicture));
-
-});
-
-
-likesElements.forEach((likesElement) => {
-  likesCountFunction(likesCounts,likesElement);
-  console.log(likesCounts,likesElement);
-});
-
-pictureCloseButton.addEventListener('click',closeBigPicture);
-document.addEventListener('keydown', closeBigPictureEsc);
-
-
-console.log('rrrr');
+};
