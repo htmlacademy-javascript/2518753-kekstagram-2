@@ -23,22 +23,29 @@ function closeBigPictureEsc(evt){
 function currentListComments (comments){
 
   let currentIndex = 0;
-  let endIndex = 5;
-  const currentList = comments.slice(currentIndex, endIndex);
-  btnCommentsLoader.addEventListener('click',() =>{
-    currentIndex += 5;
-    endIndex += 5;
-    currentListComments(comments);
-  });
+  const commentsPerPage = 5;
+  const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
+  function displayComments(){
+    const currentList = comments.slice(currentIndex,currentIndex + commentsPerPage);
+    socialCommentShownCount.textContent = currentIndex + commentsPerPage ;
+    currentList.forEach(({ id, avatar, name, message }) => {
+      bigWindowComments.insertAdjacentHTML('beforeend', `
+          <li class="social__comment" id="comment-${id}">
+              <img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35">
+              <p class="social__text">${message}</p>
+          </li>
+      `);
 
-  currentList.forEach(({ id, avatar, name, message }) => {
-    bigWindowComments.insertAdjacentHTML('beforeend', `
-        <li class="social__comment" id="comment-${id}">
-            <img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35">
-            <p class="social__text">${message}</p>
-        </li>
-    `);
-  });
+    });
+    currentIndex += commentsPerPage;
+    if (currentIndex >= comments.length) {
+      btnCommentsLoader.style.display = 'none';
+    }
+  }
+
+  btnCommentsLoader.addEventListener('click', displayComments);
+  displayComments();
+
 }
 
 
