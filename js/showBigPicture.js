@@ -22,10 +22,12 @@ function closeBigPictureEsc(evt){
 
 function currentListComments (comments){
 
-  const currentIndex = 0;
-  const endIndex = 5;
-  const currentList = comments.slice(currentIndex, currentIndex + endIndex);
+  let currentIndex = 0;
+  let endIndex = 5;
+  const currentList = comments.slice(currentIndex, endIndex);
   btnCommentsLoader.addEventListener('click',() =>{
+    currentIndex += 5;
+    endIndex += 5;
     currentListComments(comments);
   });
 
