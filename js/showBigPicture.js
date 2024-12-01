@@ -3,7 +3,6 @@ const bigWindowImg = document.querySelector('.big-picture__img img');
 const bigWindowLikes = document.querySelector('.likes-count');
 const btnWindowCancel = bigWindow.querySelector('.big-picture__cancel');
 const bigWindowTotalComment = document.querySelector('.social__comment-total-count');
-const bigWindowCountComment = document.querySelector('.social__comment-count');
 const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
 const commentsLoader = bigWindow.querySelector('.comments-loader');
