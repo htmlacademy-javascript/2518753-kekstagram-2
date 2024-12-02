@@ -16,7 +16,7 @@ similar.forEach(({url, description, likes, comments}) => {
   templateClone.querySelector('.picture__likes').textContent = likes;
   templateClone.querySelector('.picture__comments').textContent = comments.length;
   photoListFragment.append(templateClone);
-  picture.addEventListener('click', () => {
+  picture.addEventListener('click', () =>{
     showBigPicture({url, description, likes, comments});
   });
 });
