@@ -1,5 +1,5 @@
 import { userPhotos } from './data.js';
-import { showBigPicture } from './showBigPicture.js';
+import { showBigPicture } from './show-big-picture.js';
 
 
 const similar = userPhotos();
@@ -16,7 +16,9 @@ similar.forEach(({url, description, likes, comments}) => {
   templateClone.querySelector('.picture__likes').textContent = likes;
   templateClone.querySelector('.picture__comments').textContent = comments.length;
   photoListFragment.append(templateClone);
-  picture.addEventListener('click',()=>showBigPicture({url, description, likes, comments}));
+  picture.addEventListener('click', () => {
+    showBigPicture({url, description, likes, comments});
+  });
 });
 picturesContainer.append(photoListFragment);
 

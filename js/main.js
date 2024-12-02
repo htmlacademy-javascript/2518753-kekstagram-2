@@ -1,6 +1,5 @@
 import { isMeetingWithinWorkHours } from './functions.js';
-import './createPhotos.js';
-import './showBigPicture.js';
+import './create-photos.js';
 
 
 console.log(isMeetingWithinWorkHours('8:00', '10:00', '8:00', 120));
