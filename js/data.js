@@ -24,6 +24,7 @@ export const names = [
   'Ксения'
 ];
 
+
 export const description = [
   'Природа',
   'Город',
