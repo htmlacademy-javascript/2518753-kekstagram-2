@@ -14,6 +14,7 @@ function closeBigPicture(){
   document.body.classList.remove('modal-open');
 }
 
+
 function closeBigPictureEsc(evt){
   if(evt.key === 'Escape'){
     closeBigPicture();
