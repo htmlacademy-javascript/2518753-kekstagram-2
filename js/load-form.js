@@ -5,7 +5,8 @@ const btnImgUploadClose = document.querySelector('#upload-cancel');
 const imgupLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgupLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgupLoadText.querySelector('.text__description');
-
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 function openUploadImg (){
   imgUpload.classList.remove(CLASS_NAME_HIDDEN);
   document.body.classList.add('modal-open');
@@ -49,25 +50,43 @@ const pristine = new Pristine(imgupLoadText,{
   errorTextParent: 'img-upload__field-wrapper',
 
 });
-pristine.addValidator(hashtagInput, (value) => {
-  if (!value.trim()) {
-    return true;
-  }
+
+function validateHashtags(value) {
   const hashtags = value.split(' ');
-  const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
+  const isValidHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
   const uniqueHashtags = new Set(hashtags);
 
-  return hashtags.every((hashtag) => hashtagRegex.test(hashtag)) && uniqueHashtags.size === hashtags.length && hashtags.length <= 5;
-}, 'Неправильный хэштег');
-
-
-pristine.addValidator(hashtagDescription, (value) => {
-  const isVailedComment = value.length;
-  const maxLengthComment = 140;
   if (!value.trim()) {
     return true;
   }
-  if(isVailedComment <= maxLengthComment){
-    return isVailedComment;
+
+  return hashtags.every((hashtag) => isValidHashtag.test(hashtag)) &&
+	uniqueHashtags.size === hashtags.length &&
+	hashtags.length <= 5;
+}
+
+pristine.addValidator(hashtagInput, validateHashtags, 'Неправильный хэштег');
+
+function validateDescription(value) {
+  const maxLengthComment = 140;
+
+  if (!value.trim()) {
+    return true;
   }
-},'Неправильная длина комментария');
+
+  return value.length <= maxLengthComment;
+
+}
+
+pristine.addValidator(hashtagDescription, validateDescription, 'Неправильная длина комментария');
+
+
+imgUploadForm.addEventListener('submit', (event) => {
+  const isHashtagsValid = pristine.validate(hashtagInput);
+  const isDescriptionValid = pristine.validate(hashtagDescription);
+
+  if (!isHashtagsValid || !isDescriptionValid) {
+    event.preventDefault();
+    alert('Пожалуйста, исправьте ошибки в форме.');
+  }
+});
