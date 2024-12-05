@@ -45,10 +45,11 @@ hashtagDescription.addEventListener('keydown', (event) => {
 });
 
 const pristine = new Pristine(imgupLoadText,{
-  classTo:'img-upload__field-wrapper',
+  classTo:'img-upload__text',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
-
+  errorTextTag: 'div',
+  errorTextClass: 'pristine-error'
 });
 
 function validateHashtags(value) {
@@ -60,9 +61,30 @@ function validateHashtags(value) {
     return true;
   }
 
-  return hashtags.every((hashtag) => isValidHashtag.test(hashtag)) &&
-	uniqueHashtags.size === hashtags.length &&
-	hashtags.length <= 5;
+  if (!hashtagInput.pristine) {
+    hashtagInput.pristine = {};
+  }
+  if (!hashtagInput.pristine.errors) {
+    hashtagInput.pristine.errors = [];
+  }
+
+  if (!hashtags.every((hashtag) => isValidHashtag.test(hashtag))) {
+    pristine.addError(hashtagInput, 'Один или несколько хештегов не соответствуют допустимому формату.');
+    return false;
+  }
+
+
+  if (uniqueHashtags.size !== hashtags.length) {
+    pristine.addError(hashtagInput, 'Хештеги должны быть уникальными.');
+    return false;
+  }
+
+  if (hashtags.length > 5) {
+    pristine.addError(hashtagInput, 'Максимальное количество хештегов — 5.');
+    return false;
+  }
+
+  return true;
 }
 
 pristine.addValidator(hashtagInput, validateHashtags, 'Неправильный хэштег');
