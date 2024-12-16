@@ -1,4 +1,5 @@
-import {CLASS_NAME_HIDDEN} from'./util.js';
+import {CLASS_NAME_HIDDEN,hasKeyEscape} from'./util.js';
+
 const bigWindow = document.querySelector('.big-picture');
 const bigWindowImg = bigWindow .querySelector('.big-picture__img img');
 const bigWindowLikes = bigWindow .querySelector('.likes-count');
@@ -15,9 +16,7 @@ function closeBigPicture(){
 }
 
 function closeBigPictureEsc(evt){
-  if(evt.key === 'Escape'){
-    closeBigPicture();
-  }
+  hasKeyEscape(evt) && closeBigPicture();
 }
 
 
