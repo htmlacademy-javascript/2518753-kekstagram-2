@@ -27,10 +27,8 @@ function closeUploadImg(){
 }
 
 function closeUploadImgEsc(evt){
-  hasKeyEscape(evt) && closeUploadImg();
+  return hasKeyEscape(evt) && closeUploadImg();
 }
 
-uploadFile.addEventListener('change',() =>{
-  openUploadImg ();
-});
+uploadFile.addEventListener('change',openUploadImg);
 
