@@ -1,4 +1,5 @@
 import{getRandomInteger} from './util.js';
+
 const maxId = 25;
 const maxLikes = 200;
 const maxComments = 30;
