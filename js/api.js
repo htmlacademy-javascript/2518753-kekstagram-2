@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/data';
+export const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA:'/data',
@@ -15,8 +15,10 @@ const ErrorText = {
   [Method.POST]:'Не удалось отправить данные формы',
 };
 const load = (route, method = Method.GET, body = null)=>
-  fetch(`${BASE_URL}${route}`, {method,body});
+  fetch(`${BASE_URL}${route}`, {method,body})
     .then((response)=>
-response.ok? response.json() : Promise.reject(ErrorText[method]));
-const getData=()=>load(Route.GET_DATA);
-const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body)
+      response.ok ? response.json() : Promise.reject(ErrorText[method])
+    );
+
+export const getData = ()=>load(Route.GET_DATA);
+const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body);
