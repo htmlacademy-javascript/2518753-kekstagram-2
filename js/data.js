@@ -48,7 +48,6 @@ getData().then ((data)=>{
 }).catch((error)=>{
   console.error(error);
 });
-
 export function userPhotos() {
   return Array.from({ length: maxId }, () => ({
     id: getRandomInteger(0, maxId),
@@ -63,3 +62,4 @@ export function userPhotos() {
     }))
   }));
 }
+
