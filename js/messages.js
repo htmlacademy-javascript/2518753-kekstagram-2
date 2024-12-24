@@ -1,10 +1,7 @@
-import { hasKeyEscape } from './util';
-
 const messageFragment = document.createDocumentFragment();
 const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const errorMessageElement = errorMessageTemplate.cloneNode(true);
 const REMOVE_MESSAGE_TIMEOUT = 5000;
-const messageFragmentSuccess = document.createDocumentFragment();
 const messageSuccessTemplate = document.querySelector('#success').content.querySelector('.success');
 const messageSuccessElement = messageSuccessTemplate.cloneNode(true);
 export const showErrorMessage = ()=>{
@@ -19,20 +16,17 @@ export const showSuccessMessage = ()=>{
   messageFragment.append(messageSuccessElement);
   document.body.appendChild(messageFragment);
   const loadSuccess = document.body.querySelector('.success');
-  setTimeout(()=> loadSuccess.remove(), REMOVE_MESSAGE_TIMEOUT);
   const btnCloseSuccess = document.body.querySelector('.success__button');
-  document.addEventListener('keydown', (event) => {
+  const removeMessage = ()=>{
+    loadSuccess.remove();
+  };
+  const removeMessageEsc = (event)=>{
     if (event.key === 'Escape') {
       loadSuccess.remove();
     }
-  });
-  btnCloseSuccess.addEventListener('click',()=>{
-    loadSuccess.remove();
-  });
-
-  loadSuccess.addEventListener('click', (event) => {
-    if (event.target === loadSuccess) {
-      loadSuccess.remove();
-    }
-  });
+  };
+  document.addEventListener('keydown',removeMessageEsc);
+  btnCloseSuccess.addEventListener('click',removeMessage);
+  setTimeout(()=> loadSuccess.remove(), REMOVE_MESSAGE_TIMEOUT);
+  loadSuccess.addEventListener('click', removeMessage);
 };
