@@ -35,9 +35,19 @@ export const showSuccessMessage = ()=>{
 };
 
 
-export const showErrorMessageLoad = ()=>{
+export const showErrorImgLoad = ()=>{
   messageFragment.append(errorLoadImgElement);
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
-  setTimeout(()=>loadErrorImg.remove(),REMOVE_MESSAGE_TIMEOUT);
+  const btnloadErrorImg = document.body.querySelector('.error__button');
+  const removeErrorImg = ()=>{
+    loadErrorImg.remove();
+  };
+  const removeErrorImgEsc = (event)=>{
+    if (event.key === 'Escape') {
+      loadErrorImg.remove();
+    }
+  };
+  document.addEventListener('keydown',removeErrorImgEsc);
+  btnloadErrorImg.addEventListener('click',removeErrorImg);
 };

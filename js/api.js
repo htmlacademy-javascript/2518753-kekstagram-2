@@ -1,10 +1,10 @@
-import { showErrorMessage, showErrorMessageLoad } from './messages';
+import { showErrorMessage, showErrorImgLoad } from './messages';
 
 export const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA:'/data',
-  SEND_DATA:'/111',
+  SEND_DATA:'/',
 };
 
 const Method = {
@@ -13,7 +13,7 @@ const Method = {
 };
 
 const ErrorText = {
-  [Method.Get]:'Не удалось загрузить данные. Попробуйте еще раз',
+  [Method.GET]:'Не удалось загрузить данные. Попробуйте еще раз',
   [Method.POST]:'Не удалось отправить данные формы',
 };
 const load = (route, method = Method.GET, body = null)=>
@@ -24,5 +24,5 @@ const load = (route, method = Method.GET, body = null)=>
 
 export const getData = ()=>load(Route.GET_DATA).catch(showErrorMessage);
 
-export const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body).catch(showErrorMessageLoad);
+export const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body).catch(showErrorImgLoad);
 
