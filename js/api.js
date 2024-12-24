@@ -1,10 +1,10 @@
-import { showErrorMessage } from './messages';
+import { showErrorMessage, showErrorMessageLoad } from './messages';
 
 export const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA:'/data',
-  SEND_DATA:'/',
+  SEND_DATA:'/111',
 };
 
 const Method = {
@@ -24,5 +24,5 @@ const load = (route, method = Method.GET, body = null)=>
 
 export const getData = ()=>load(Route.GET_DATA).catch(showErrorMessage);
 
-export const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body);
+export const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body).catch(showErrorMessageLoad);
 
