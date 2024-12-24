@@ -4,6 +4,9 @@ const errorMessageElement = errorMessageTemplate.cloneNode(true);
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 const messageSuccessTemplate = document.querySelector('#success').content.querySelector('.success');
 const messageSuccessElement = messageSuccessTemplate.cloneNode(true);
+const errorLoadImgTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorLoadImgElement = errorLoadImgTemplate.cloneNode(true);
+
 export const showErrorMessage = ()=>{
   messageFragment.append(errorMessageElement);
   document.body.appendChild(messageFragment);
@@ -29,4 +32,12 @@ export const showSuccessMessage = ()=>{
   btnCloseSuccess.addEventListener('click',removeMessage);
   setTimeout(()=> loadSuccess.remove(), REMOVE_MESSAGE_TIMEOUT);
   loadSuccess.addEventListener('click', removeMessage);
+};
+
+
+export const showErrorMessageLoad = ()=>{
+  messageFragment.append(errorLoadImgElement);
+  document.body.appendChild(messageFragment);
+  const loadErrorImg = document.body.querySelector('.error');
+  setTimeout(()=>loadErrorImg.remove(),REMOVE_MESSAGE_TIMEOUT);
 };
