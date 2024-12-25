@@ -1,4 +1,3 @@
-// import { userPhotos } from './data.js';
 import { showBigPicture } from './show-big-picture.js';
 import{getData} from'./api.js';
 
