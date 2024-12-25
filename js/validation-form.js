@@ -6,7 +6,22 @@ const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadSubmit = document.getElementById('upload-submit');
 
+const imgUploadSubmitText = {
+  IDLE:'Опубликовать',
+  SENDING:'Сохраняю...',
+};
+
+const disabledButton = (text)=>{
+  imgUploadSubmit.disabled = true;
+  imgUploadSubmit.textContent = text;
+};
+
+const enableButton = (text)=>{
+  imgUploadSubmit.disabled = false;
+  imgUploadSubmit.textContent = text;
+};
 
 const pristine = new Pristine(imgUploadForm,{
   classTo:'img-upload__field-wrapper',
@@ -63,10 +78,12 @@ pristine.addValidator(hashtagInput, validateHashtags, error);
 
 imgUploadForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  disabledButton(imgUploadSubmitText.SENDING);
   if (!pristine.validate()) {
     return;
   }
   return sendData(new FormData(event.target)).then(() => {
+    enableButton(imgUploadSubmitText.IDLE);
     closeUploadImg();
     showSuccessMessage();
   }).catch(showErrorImgLoad);
@@ -74,3 +91,5 @@ imgUploadForm.addEventListener('submit', (event) => {
 
 [hashtagInput,hashtagDescription].forEach((item) => item.addEventListener('keydown',onEscape));
 
+// disabledButton(imgUploadFormText.SENDING);
+// enableButton(imgUploadFormText.IDLE);
