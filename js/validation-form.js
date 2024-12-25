@@ -1,6 +1,6 @@
 import { sendData } from './api';
 import { closeUploadImg } from './load-form';
-import { showSuccessMessage } from './messages';
+import { showSuccessMessage,showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
@@ -66,10 +66,10 @@ imgUploadForm.addEventListener('submit', (event) => {
   if (!pristine.validate()) {
     return;
   }
-  return sendData (new FormData(event.target)).then(() => {
+  return sendData(new FormData(event.target)).then(() => {
     closeUploadImg();
     showSuccessMessage();
-  });
+  }).catch(showErrorImgLoad);
 });
 
 [hashtagInput,hashtagDescription].forEach((item) => item.addEventListener('keydown',onEscape));
