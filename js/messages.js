@@ -1,3 +1,7 @@
+import { closeUploadImg } from './load-form';
+import { enableButton, imgUploadSubmitText } from './validation-form';
+
+
 const messageFragment = document.createDocumentFragment();
 const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const errorMessageElement = errorMessageTemplate.cloneNode(true);
@@ -40,6 +44,8 @@ export const showErrorImgLoad = ()=>{
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
   const btnloadErrorImg = document.body.querySelector('.error__button');
+  closeUploadImg();
+  enableButton(imgUploadSubmitText.IDLE);
   const removeErrorImg = ()=>{
     loadErrorImg.remove();
   };

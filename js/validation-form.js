@@ -8,7 +8,7 @@ const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
-const imgUploadSubmitText = {
+export const imgUploadSubmitText = {
   IDLE:'Опубликовать',
   SENDING:'Сохраняю...',
 };
@@ -18,7 +18,7 @@ const disabledButton = (text)=>{
   imgUploadSubmit.textContent = text;
 };
 
-const enableButton = (text)=>{
+export const enableButton = (text)=>{
   imgUploadSubmit.disabled = false;
   imgUploadSubmit.textContent = text;
 };
@@ -87,9 +87,8 @@ imgUploadForm.addEventListener('submit', (event) => {
     closeUploadImg();
     showSuccessMessage();
   }).catch(showErrorImgLoad);
+
 });
 
 [hashtagInput,hashtagDescription].forEach((item) => item.addEventListener('keydown',onEscape));
 
-// disabledButton(imgUploadFormText.SENDING);
-// enableButton(imgUploadFormText.IDLE);
