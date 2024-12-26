@@ -46,17 +46,24 @@ export const showErrorImgLoad = ()=>{
   messageFragment.append(errorLoadImgElement);
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
-  const btnLoadErrorImg = document.body.querySelector('.error__button');
+  const btnlLoadErrorImg = document.body.querySelector('.error__button');
   closeUploadImg();
   enableButton(imgUploadSubmitText.IDLE);
-  const removeErrorImg = ()=>{
-    loadErrorImg.remove();
-  };
-  const removeErrorImgEsc = (event)=>{
-    if (hasKeyEscape(event)) {
-      loadErrorImg.remove();
+  const removeElement = (element)=>{
+    if(element){
+      element.remove();
     }
   };
-  document.addEventListener('keydown',removeErrorImgEsc);
-  btnLoadErrorImg.addEventListener('click',removeErrorImg);
+  const removeErrorImg = (event) => {
+    if (event && hasKeyEscape(event)) {
+      if (hasKeyEscape(event)) {
+        removeElement(loadErrorImg);
+      }
+    } else if (event && event.type === 'click') {
+      removeElement(loadErrorImg);
+    }
+  };
+
+  document.addEventListener('keydown',removeErrorImg);
+  btnlLoadErrorImg.addEventListener('click',removeErrorImg);
 };
