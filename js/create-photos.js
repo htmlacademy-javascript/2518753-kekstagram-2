@@ -1,5 +1,6 @@
 import { showBigPicture } from './show-big-picture.js';
 import{getData} from'./api.js';
+import { showErrorMessage } from './messages.js';
 
 
 const photoListFragment = document.createDocumentFragment();
@@ -22,4 +23,4 @@ getData().then ((similar)=>{
     });
   });
   picturesContainer.append(photoListFragment);
-});
+}).catch(showErrorMessage);

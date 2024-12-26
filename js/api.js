@@ -22,7 +22,7 @@ const load = (route, method = Method.GET, body = null)=>
       response.ok ? response.json() : Promise.reject(ErrorText[method])
     );
 
-export const getData = ()=>load(Route.GET_DATA).catch(showErrorMessage);
+export const getData = ()=>load(Route.GET_DATA);
 
 export const sendData = (body)=>load(Route.SEND_DATA,Method.POST,body);
 
