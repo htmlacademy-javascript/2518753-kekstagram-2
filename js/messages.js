@@ -20,50 +20,38 @@ export const showErrorMessage = ()=>{
 };
 
 
+const removeMessage = (element)=>element.remove();
+
+const removeMessageEsc = (event,element) => {
+  if (hasKeyEscape(event)) {
+    removeMessage(element);
+  }
+};
+
 export const showSuccessMessage = ()=>{
   messageFragment.append(messageSuccessElement);
   document.body.appendChild(messageFragment);
   const loadSuccess = document.body.querySelector('.success');
-  const removeMessage = ()=>{
-    loadSuccess.remove();
-  };
-  const removeMessageEsc = (event) => {
-    if (hasKeyEscape(event)) {
-      removeMessage();
-    }
-  };
-  document.body.addEventListener('click', (event) => {
+  loadSuccess.body.addEventListener('click', (event) => {
     if (event.target.matches('.success__button') || event.target === loadSuccess) {
-      removeMessage();
+      removeMessage(loadSuccess);
     }
   });
-  document.addEventListener('keydown', removeMessageEsc);
+  document.addEventListener('keydown',(evt)=> removeMessageEsc(evt,loadSuccess));
 
 };
-
 
 export const showErrorImgLoad = ()=>{
   messageFragment.append(errorLoadImgElement);
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
-  const btnlLoadErrorImg = document.body.querySelector('.error__button');
   closeUploadImg();
   enableButton(imgUploadSubmitText.IDLE);
-  const removeElement = (element)=>{
-    if(element){
-      element.remove();
-    }
-  };
-  const removeErrorImg = (event) => {
-    if (event && hasKeyEscape(event)) {
-      if (hasKeyEscape(event)) {
-        removeElement(loadErrorImg);
-      }
-    } else if (event && event.type === 'click') {
-      removeElement(loadErrorImg);
-    }
-  };
 
-  document.addEventListener('keydown',removeErrorImg);
-  btnlLoadErrorImg.addEventListener('click',removeErrorImg);
+  document.addEventListener('keydown',(evt)=>removeMessageEsc(evt, loadErrorImg));
+  loadErrorImg.addEventListener('click',(evt)=>{
+    if(evt.target.classList.contains('error') || evt.target.classList.contains('error__button')){
+      removeMessage(loadErrorImg);
+    }
+  });
 };

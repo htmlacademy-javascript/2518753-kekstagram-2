@@ -78,10 +78,10 @@ pristine.addValidator(hashtagInput, validateHashtags, error);
 
 imgUploadForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  disabledButton(imgUploadSubmitText.SENDING);
   if (!pristine.validate()) {
     return;
   }
+  disabledButton(imgUploadSubmitText.SENDING);
   return sendData(new FormData(event.target)).then(() => {
     enableButton(imgUploadSubmitText.IDLE);
     closeUploadImg();
