@@ -1,11 +1,12 @@
 import { closeUploadImg } from './load-form';
+import { hasKeyEscape } from './util';
 import { enableButton, imgUploadSubmitText } from './validation-form';
 
 
+const REMOVE_MESSAGE_TIMEOUT = 5000;
 const messageFragment = document.createDocumentFragment();
 const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const errorMessageElement = errorMessageTemplate.cloneNode(true);
-const REMOVE_MESSAGE_TIMEOUT = 5000;
 const messageSuccessTemplate = document.querySelector('#success').content.querySelector('.success');
 const messageSuccessElement = messageSuccessTemplate.cloneNode(true);
 const errorLoadImgTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -19,41 +20,38 @@ export const showErrorMessage = ()=>{
 };
 
 
+const removeMessage = (element)=>element.remove();
+
+const removeMessageEsc = (event,element) => {
+  if (hasKeyEscape(event)) {
+    removeMessage(element);
+  }
+};
+
 export const showSuccessMessage = ()=>{
   messageFragment.append(messageSuccessElement);
   document.body.appendChild(messageFragment);
   const loadSuccess = document.body.querySelector('.success');
-  const btnCloseSuccess = document.body.querySelector('.success__button');
-  const removeMessage = ()=>{
-    loadSuccess.remove();
-  };
-  const removeMessageEsc = (event)=>{
-    if (event.key === 'Escape') {
-      loadSuccess.remove();
+  loadSuccess.body.addEventListener('click', (event) => {
+    if (event.target.matches('.success__button') || event.target === loadSuccess) {
+      removeMessage(loadSuccess);
     }
-  };
-  document.addEventListener('keydown',removeMessageEsc);
-  btnCloseSuccess.addEventListener('click',removeMessage);
-  setTimeout(()=> loadSuccess.remove(), REMOVE_MESSAGE_TIMEOUT);
-  loadSuccess.addEventListener('click', removeMessage);
-};
+  });
+  document.addEventListener('keydown',(evt)=> removeMessageEsc(evt,loadSuccess));
 
+};
 
 export const showErrorImgLoad = ()=>{
   messageFragment.append(errorLoadImgElement);
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
-  const btnloadErrorImg = document.body.querySelector('.error__button');
   closeUploadImg();
   enableButton(imgUploadSubmitText.IDLE);
-  const removeErrorImg = ()=>{
-    loadErrorImg.remove();
-  };
-  const removeErrorImgEsc = (event)=>{
-    if (event.key === 'Escape') {
-      loadErrorImg.remove();
+
+  document.addEventListener('keydown',(evt)=>removeMessageEsc(evt, loadErrorImg));
+  loadErrorImg.addEventListener('click',(evt)=>{
+    if(evt.target.classList.contains('error') || evt.target.classList.contains('error__button')){
+      removeMessage(loadErrorImg);
     }
-  };
-  document.addEventListener('keydown',removeErrorImgEsc);
-  btnloadErrorImg.addEventListener('click',removeErrorImg);
+  });
 };
