@@ -5,6 +5,7 @@ const effectsPreview = document.querySelectorAll('.effects__radio');
 const effectsContainer = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 
+
 export function defaultEffects () {
   imgUploadPreview.className = '';
   imgUploadPreview.style = '';
