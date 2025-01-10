@@ -32,7 +32,7 @@ export const showSuccessMessage = ()=>{
   messageFragment.append(messageSuccessElement);
   document.body.appendChild(messageFragment);
   const loadSuccess = document.body.querySelector('.success');
-  loadSuccess.body.addEventListener('click', (event) => {
+  loadSuccess.addEventListener('click', (event) => {
     if (event.target.matches('.success__button') || event.target === loadSuccess) {
       removeMessage(loadSuccess);
     }
