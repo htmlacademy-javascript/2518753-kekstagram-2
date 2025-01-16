@@ -1,7 +1,7 @@
 import { showBigPicture } from './show-big-picture.js';
 import{getData} from'./api.js';
 import { showErrorMessage } from './messages.js';
-import { configFilter, pictures } from './img-filter.js';
+import { configFilter } from './img-filter.js';
 
 
 const photoListFragment = document.createDocumentFragment();
@@ -10,7 +10,6 @@ const picturesContainer = document.querySelector('.pictures');
 
 
 getData().then ((similar)=>{
-  configFilter(similar);
   similar.forEach(({url, description, likes, comments}) => {
     const templateClone = template.content.cloneNode(true);
     const picture = templateClone.querySelector('.picture');
@@ -25,4 +24,5 @@ getData().then ((similar)=>{
     });
   });
   picturesContainer.append(photoListFragment);
+  configFilter(similar);
 }).catch(showErrorMessage);
