@@ -4,7 +4,7 @@ const filterImgRandom = document.querySelector('#filter-random');
 const imgFilters = document.querySelector('.img-filters');
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = 'filter-default';
-let pictures = [];
+export let pictures = [];
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 
