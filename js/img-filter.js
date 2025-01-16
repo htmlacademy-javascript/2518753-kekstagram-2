@@ -31,14 +31,18 @@ function onFilterChange(evt){
 
 function applyFilter(){
   let filteredPictures = [];
-  if(currentFilter === 'filer-default'){
-    filteredPictures = pictures;
-  }
-  if(currentFilter === 'filter-random'){
-    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0.10);
-  }
-  if(currentFilter === 'filter-discussed'){
-    filteredPictures = pictures.toSorted((a,b)=>b.comments.length - a.comments.length);
+  switch(currentFilter){
+
+    case'filer-default':
+      filteredPictures = pictures;
+      break;
+
+    case'filter-random':
+      filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0.10);
+      break;
+
+    case'filter-discussed':filteredPictures = pictures.toSorted((a,b)=>b.comments.length - a.comments.length);
+      break;
   }
   debounce(filteredPictures);
 }
