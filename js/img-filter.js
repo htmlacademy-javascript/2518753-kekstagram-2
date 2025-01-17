@@ -1,17 +1,10 @@
+import { debounce } from './util';
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = 'filter-default';
 export let pictures = [];
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 
-function debounce (callback, timeoutDelay = 500) {
-  let timeoutId;
-
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
-}
 function onFilterChange(evt){
   const targetButton = evt.target;
   const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
