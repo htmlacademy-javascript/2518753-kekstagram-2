@@ -6,6 +6,7 @@ import { resetForm } from './validation-form.js';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const effectsPreviewImg = document.querySelectorAll('.effects__preview ');
 export const imgUpload = document.querySelector('.img-upload__overlay');
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
