@@ -1,6 +1,11 @@
-import './create-photos.js';
-import'./load-form.js';
-import './effects-img.js';
-import './validation-form.js';
-import './scale-img.js';
-import './img-filter.js';
+import{showErrorMessage} from './messages.js';
+import { getData } from './api.js';
+import { creatPhotos } from './create-photos.js';
+import{configFilter} from './img-filter.js';
+try{
+  const pictures = await getData();
+  creatPhotos(pictures);
+  configFilter(pictures);
+} catch{
+  showErrorMessage();
+}
