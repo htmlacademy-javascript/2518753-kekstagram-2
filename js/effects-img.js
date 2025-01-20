@@ -23,7 +23,7 @@ noUiSlider.create(effectsContainer,{
   step: 0.1
 });
 effectsContainer.noUiSlider.on('update', (values) => {
-  effectLevelValue.value = values[0];
+  effectLevelValue.value = parseFloat(values[0]);
 });
 
 effectsPreview.forEach((effectChecked) => {
@@ -40,7 +40,7 @@ effectsPreview.forEach((effectChecked) => {
             min:0,
             max:1
           },
-          step:1,
+          step:0.1,
           start:1
         });
         effectsContainer.noUiSlider.on('update',(evt)=>{
