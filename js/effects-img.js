@@ -2,8 +2,9 @@ import { CLASS_NAME_HIDDEN } from './util.js';
 import { imgUploadPreview } from './scale-img.js';
 
 const effectsPreview = document.querySelectorAll('.effects__radio');
-const effectsContainer = document.querySelector('.img-upload__effect-level');
+const effectsContainer = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
+const imgUploadEffect = document.querySelector('.img-upload__effect-level');
 
 
 export function defaultEffects() {
@@ -11,8 +12,7 @@ export function defaultEffects() {
   imgUploadPreview.style = '';
   effectLevelValue.value = '';
   effectsContainer.classList.add(CLASS_NAME_HIDDEN);
-  imgUploadEffect.classList.add(CLASS_NAME_HIDDEN);
-};
+}
 
 noUiSlider.create(effectsContainer, {
   range: {
@@ -31,6 +31,7 @@ effectsPreview.forEach((effectChecked) => {
     effectsContainer.classList.remove(CLASS_NAME_HIDDEN);
     const selectEffect = effectChecked.value;
     imgUploadPreview.classList.add(`effect__preview--${selectEffect}`);
+
 
     switch (selectEffect) {
       case 'chrome':
