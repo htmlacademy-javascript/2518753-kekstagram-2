@@ -10,7 +10,15 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
-export const onUploadImgClose = () => {
+
+function openUploadImg() {
+  imgUpload.classList.remove(CLASS_NAME_HIDDEN);
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', closeUploadImgEsc);
+  btnImgUploadClose.addEventListener('click', closeUploadImg);
+}
+
+export function closeUploadImg() {
   imgUpload.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
