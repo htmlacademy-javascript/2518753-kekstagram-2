@@ -16,7 +16,7 @@ function closeBigPicture(){
 }
 
 function closeBigPictureEsc(evt){
-  hasKeyEscape(evt) && closeBigPicture();
+  return hasKeyEscape(evt) && closeBigPicture();
 }
 
 

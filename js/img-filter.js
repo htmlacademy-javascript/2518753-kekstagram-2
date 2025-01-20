@@ -7,7 +7,7 @@ const FILTER = {
   Random:'filter-random',
   Discussed:'filter-discussed',
 };
-
+const MAX_COUNT = 10;
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
@@ -37,7 +37,7 @@ function applyFilter(){
       break;
 
     case FILTER.Random:
-      filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0,10);
+      filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0,MAX_COUNT);
       break;
 
     case FILTER.Discussed:filteredPictures = pictures.toSorted((a,b)=>b.comments.length - a.comments.length);
