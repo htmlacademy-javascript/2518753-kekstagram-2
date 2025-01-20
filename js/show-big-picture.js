@@ -55,7 +55,6 @@ function currentListComments(comments) {
 export const showBigPicture = ({url, description, likes, comments})=>{
   bigWindow.classList.remove(CLASS_NAME_HIDDEN);
   commentsLoader.classList.remove(CLASS_NAME_HIDDEN);
-
   bigWindowComments.innerHTML = '';
   bigWindowImg.src = url;
   bigWindowLikes.textContent = likes;

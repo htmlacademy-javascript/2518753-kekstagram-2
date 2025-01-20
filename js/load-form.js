@@ -15,6 +15,7 @@ function openUploadImg (){
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', closeUploadImgEsc);
   btnImgUploadClose.addEventListener('click',closeUploadImg);
+  defaultEffects();
 }
 
 export function closeUploadImg(){
