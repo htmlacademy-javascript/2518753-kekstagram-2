@@ -38,10 +38,9 @@ export const resetForm = ()=>{
 const onEscape = (event)=>hasKeyEscape(event) && event.stopPropagation();
 
 function validateHashtags(value) {
-  const hashtags = value.split(' ');
-
+  const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
-  const uniqueHashtags = new Set(hashtags);
+  const uniqueHashtags = new Set();
 
   if (!value.trim()) {
     return true;
@@ -53,16 +52,30 @@ function validateHashtags(value) {
   if (!hashtagInput.pristine.errors) {
     hashtagInput.pristine.errors = [];
   }
+  if (hashtags.some((hashtag) => hashtag.length > 20)) {
+    errorMessege = 'Максимальная длина одного хэш-тега — 20 символов, включая решётку.';
+    hashtagInput.pristine.errors.push(errorMessege);
+    return false;
+  }
 
   if (!hashtags.every((hashtag) => isValidHashtag.test(hashtag))) {
     errorMessege = 'Один или несколько хештегов не соответствуют допустимому формату.';
     return false;
   }
-
-
-  if (uniqueHashtags.size !== hashtags.length) {
-    errorMessege = 'Хештеги должны быть уникальными.';
+  if (hashtags.some((hashtag) => hashtag === '#')) {
+    errorMessege = 'Хештег не может состоять только из символа #.';
     return false;
+  }
+
+
+  for (const hashtag of hashtags) {
+    const lowerCaseHashtag = hashtag.toLowerCase();
+    if (uniqueHashtags.has(lowerCaseHashtag)) {
+      errorMessege = 'Хэш-теги должны быть уникальными.';
+      hashtagInput.pristine.errors.push(errorMessege);
+      return false;
+    }
+    uniqueHashtags.add(lowerCaseHashtag);
   }
 
   if (hashtags.length > 5) {
