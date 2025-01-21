@@ -79,6 +79,17 @@ const validateHashtags = (value) => {
     uniqueHashtags.add(lowerCaseHashtag);
   }
 
+
+  for (const hashtag of hashtags) {
+    const lowerCaseHashtag = hashtag.toLowerCase();
+    if (uniqueHashtags.has(lowerCaseHashtag)) {
+      errorMessege = 'Хэш-теги должны быть уникальными.';
+      hashtagInput.pristine.errors.push(errorMessege);
+      return false;
+    }
+    uniqueHashtags.add(lowerCaseHashtag);
+  }
+
   if (hashtags.length > 5) {
     errorMessage = 'Максимальное количество хештегов — 5.';
     return false;
