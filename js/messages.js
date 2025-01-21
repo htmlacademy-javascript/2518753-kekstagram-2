@@ -1,4 +1,6 @@
 import { hasKeyEscape } from './util';
+import { enableButton, imgUploadSubmitText } from './validation-form';
+
 
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 const messageFragment = document.createDocumentFragment();
@@ -35,6 +37,7 @@ export const showSuccessMessage = () => {
     }
   });
   document.addEventListener('keydown', (evt) => removeMessageEsc(evt, loadSuccess));
+
 };
 
 export const showErrorImgLoad = () => {
