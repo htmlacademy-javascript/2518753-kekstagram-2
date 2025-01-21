@@ -1,7 +1,6 @@
 import {CLASS_NAME_HIDDEN,hasKeyEscape} from'./util.js';
 import { resetScale,imgUploadPreview } from './scale-img.js';
 import{defaultEffects} from './effects-img.js';
-import { resetForm } from './validation-form.js';
 
 
 export const imgUpload = document.querySelector('.img-upload__overlay');
@@ -22,7 +21,6 @@ export function closeUploadImg(){
   imgUpload.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
-  resetForm();
   defaultEffects();
   resetScale();
   uploadFile.removeEventListener('click',closeUploadImg);
