@@ -29,8 +29,8 @@ const pristine = new Pristine(imgUploadForm,{
   errorTextParent: 'img-upload__field-wrapper',
 
 });
-let errorMessege = '';
-const error = ()=>errorMessege;
+let errorMessage = '';
+const error = ()=>errorMessage;
 export const resetForm = ()=>{
   pristine.reset();
   imgUploadForm.reset();
@@ -53,17 +53,17 @@ function validateHashtags(value) {
     hashtagInput.pristine.errors = [];
   }
   if (hashtags.some((hashtag) => hashtag.length > 20)) {
-    errorMessege = 'Максимальная длина одного хэш-тега — 20 символов, включая решётку.';
-    hashtagInput.pristine.errors.push(errorMessege);
+    errorMessage = 'Максимальная длина одного хэш-тега — 20 символов, включая решётку.';
+    hashtagInput.pristine.errors.push(errorMessage);
     return false;
   }
 
   if (!hashtags.every((hashtag) => isValidHashtag.test(hashtag))) {
-    errorMessege = 'Один или несколько хештегов не соответствуют допустимому формату.';
+    errorMessage = 'Один или несколько хештегов не соответствуют допустимому формату.';
     return false;
   }
   if (hashtags.some((hashtag) => hashtag === '#')) {
-    errorMessege = 'Хештег не может состоять только из символа #.';
+    errorMessage = 'Хештег не может состоять только из символа #.';
     return false;
   }
 
@@ -71,15 +71,15 @@ function validateHashtags(value) {
   for (const hashtag of hashtags) {
     const lowerCaseHashtag = hashtag.toLowerCase();
     if (uniqueHashtags.has(lowerCaseHashtag)) {
-      errorMessege = 'Хэш-теги должны быть уникальными.';
-      hashtagInput.pristine.errors.push(errorMessege);
+      errorMessage = 'Хэш-теги должны быть уникальными.';
+      hashtagInput.pristine.errors.push(errorMessage);
       return false;
     }
     uniqueHashtags.add(lowerCaseHashtag);
   }
 
   if (hashtags.length > 5) {
-    errorMessege = 'Максимальное количество хештегов — 5.';
+    errorMessage = 'Максимальное количество хештегов — 5.';
     return false;
   }
 
