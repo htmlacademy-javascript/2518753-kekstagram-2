@@ -10,41 +10,46 @@ const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
-let currentIndex = 0;
-let pictureComments = [];
-
-const resetCommentsCount = () => {
-  currentIndex = 0;
-};
-const onBigPictureClose = () => {
-  resetCommentsCount();
+function closeBigPicture() {
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
-};
+}
 
-const onBigPictureCloseEsc = (evt) => hasKeyEscape(evt) && onBigPictureClose();
-const createComment = ({ id, avatar, name, message }) => {
-  bigWindowComments.insertAdjacentHTML('beforeend', `
-    <li class="social__comment" id="comment-${id}">
-      <img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35">
-      <p class="social__text">${message}</p>
-    </li>
-  `);
-};
+function closeBigPictureEsc(evt) {
+  return hasKeyEscape(evt) && closeBigPicture();
+}
 
-const currentListComments = (comments) => {
-  currentIndex += COMMENTS_PER_PAGE;
-  if (currentIndex >= comments.length) {
-    btnCommentsLoader.style.display = 'none';
-    currentIndex = comments.length;
-  } else {
-    btnCommentsLoader.style.display = 'block';
+
+function currentListComments(comments) {
+  let currentIndex = 0;
+  const commentsPerPage = 5;
+  const totalComments = comments.length;
+
+  function renderComments() {
+    const currentList = comments.slice(currentIndex, currentIndex + commentsPerPage);
+
+    currentList.forEach(({ id, avatar, name, message }) => {
+      bigWindowComments.insertAdjacentHTML('beforeend', `
+              <li class="social__comment" id="comment-${id}">
+                  <img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35">
+                  <p class="social__text">${message}</p>
+              </li>
+          `);
+    });
+
+    currentIndex += currentList.length;
+
+    socialCommentShownCount.textContent = currentIndex;
+    if (currentIndex >= totalComments) {
+      btnCommentsLoader.style.display = 'none';
+    } else {
+      btnCommentsLoader.style.display = 'block';
+    }
   }
-  bigWindowTotalComment.textContent = comments.length;
-  socialCommentShownCount.textContent = currentIndex;
-  bigWindowComments.innerHTML = '';
-  comments.slice(0, currentIndex).forEach(createComment);
-};
+
+  btnCommentsLoader.addEventListener('click', renderComments);
+  renderComments();
+}
 
 
 export const showBigPicture = ({ url, description, likes, comments }) => {

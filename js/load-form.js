@@ -16,6 +16,7 @@ function openUploadImg() {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', closeUploadImgEsc);
   btnImgUploadClose.addEventListener('click', closeUploadImg);
+  defaultEffects();
 }
 
 export function closeUploadImg() {
@@ -24,26 +25,13 @@ export function closeUploadImg() {
   uploadFile.value = '';
   defaultEffects();
   resetScale();
-  resetForm();
-  uploadFile.removeEventListener('click', onUploadImgClose);
-  document.removeEventListener('keydown', onUploadImgClose);
-};
-const onCloseKeydownEscUploadImg = (evt) => {
-  const isErrorUploadVisible = document.querySelector('.error');
-  if (isErrorUploadVisible) {
-    return;
-  }
-  return hasKeyEscape(evt) && onUploadImgClose();
-};
+  uploadFile.removeEventListener('click', closeUploadImg);
+  document.removeEventListener('keydown', closeUploadImg);
+}
 
-const openUploadImg = () => {
-  imgUpload.classList.remove(CLASS_NAME_HIDDEN);
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onCloseKeydownEscUploadImg);
-  btnImgUploadClose.addEventListener('click', onUploadImgClose);
-  defaultEffects();
-};
-
+function closeUploadImgEsc(evt) {
+  return hasKeyEscape(evt) && closeUploadImg();
+}
 
 uploadFile.addEventListener('change', () => {
   const file = uploadFile.files[0];

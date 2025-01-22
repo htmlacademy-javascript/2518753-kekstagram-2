@@ -12,8 +12,24 @@ const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
 let pictures = [];
 const renderDebounce = debounce(creatPhotos);
+function onFilterChange(evt) {
+  const targetButton = evt.target;
+  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
+  if (!targetButton.matches('button')) {
+    return;
+  }
+  if (activeButton === targetButton) {
+    return;
+  }
 
-const applyFilter = () => {
+  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  currentFilter = targetButton.getAttribute('id');
+  applyFilter();
+}
+
+
+function applyFilter() {
   let filteredPictures = [];
   switch (currentFilter) {
     case FILTER.Default:
@@ -28,24 +44,8 @@ const applyFilter = () => {
       break;
   }
   renderDebounce(filteredPictures);
-};
-const onFilterChange = (evt) => {
-  const targetButton = evt.target;
-  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
-  if (!targetButton.matches('button')) {
-    return;
-  }
-  if (activeButton === targetButton) {
-    return;
-  }
-
-  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  currentFilter = targetButton.getAttribute('id');
-  applyFilter();
-};
-
-export const setupFilters = (picturesData) => {
+}
+export function configFilter(picturesData) {
   filterElement.classList.remove('img-filters--inactive');
   filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;

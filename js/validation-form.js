@@ -38,7 +38,7 @@ export const resetForm = () => {
 };
 const onEscape = (event) => hasKeyEscape(event) && event.stopPropagation();
 
-const validateHashtags = (value) => {
+function validateHashtags(value) {
   const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
   const uniqueHashtags = new Set();
