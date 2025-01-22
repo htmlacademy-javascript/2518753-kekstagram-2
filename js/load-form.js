@@ -1,6 +1,7 @@
 import {CLASS_NAME_HIDDEN,hasKeyEscape} from'./util.js';
 import { resetScale,imgUploadPreview } from './scale-img.js';
 import{defaultEffects} from './effects-img.js';
+import { resetForm } from './validation-form.js';
 
 
 export const imgUpload = document.querySelector('.img-upload__overlay');
@@ -14,6 +15,7 @@ export const closeUploadImg = ()=>{
   uploadFile.value = '';
   defaultEffects();
   resetScale();
+  resetForm();
   uploadFile.removeEventListener('click',closeUploadImg);
   document.removeEventListener('keydown', closeUploadImg);
 };
