@@ -30,8 +30,8 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
 
 });
-let errorMessage = '';
-const getErrorMessage = () => errorMessage;
+let errorMessege = '';
+const error = () => errorMessege;
 export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
@@ -83,8 +83,8 @@ const validateHashtags = (value) => {
   for (const hashtag of hashtags) {
     const lowerCaseHashtag = hashtag.toLowerCase();
     if (uniqueHashtags.has(lowerCaseHashtag)) {
-      errorMessege = 'Хэш-теги должны быть уникальными.';
-      hashtagInput.pristine.errors.push(errorMessege);
+      errorMessage = 'Хэш-теги должны быть уникальными.';
+      hashtagInput.pristine.errors.push(errorMessage);
       return false;
     }
     uniqueHashtags.add(lowerCaseHashtag);
