@@ -1,5 +1,6 @@
+import { closeUploadImg } from './load-form';
 import { hasKeyEscape } from './util';
-import { enableButton, imgUploadSubmitText } from './validation-form';
+import { enableButton, imgUploadSubmitText, resetForm } from './validation-form';
 
 
 const REMOVE_MESSAGE_TIMEOUT = 5000;
