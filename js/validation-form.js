@@ -37,7 +37,7 @@ export const resetForm = ()=>{
 };
 const onEscape = (event)=>hasKeyEscape(event) && event.stopPropagation();
 
-function validateHashtags(value) {
+const validateHashtags = (value) =>{
   const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
   const uniqueHashtags = new Set();
@@ -84,7 +84,7 @@ function validateHashtags(value) {
   }
 
   return true;
-}
+};
 
 pristine.addValidator(hashtagInput, validateHashtags, error);
 

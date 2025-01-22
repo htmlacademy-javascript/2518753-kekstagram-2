@@ -12,24 +12,8 @@ const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 const renderDebounce = debounce(creatPhotos);
-function onFilterChange(evt){
-  const targetButton = evt.target;
-  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
-  if(!targetButton.matches('button')){
-    return;
-  }
-  if(activeButton === targetButton){
-    return;
-  }
 
-  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  currentFilter = targetButton.getAttribute('id');
-  applyFilter();
-}
-
-
-function applyFilter(){
+const applyFilter = ()=>{
   let filteredPictures = [];
   switch(currentFilter){
     case FILTER.Default:
@@ -44,10 +28,26 @@ function applyFilter(){
       break;
   }
   renderDebounce(filteredPictures);
-}
-export function configFilter(picturesData){
+};
+const onFilterChange = (evt)=>{
+  const targetButton = evt.target;
+  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
+  if(!targetButton.matches('button')){
+    return;
+  }
+  if(activeButton === targetButton){
+    return;
+  }
+
+  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  currentFilter = targetButton.getAttribute('id');
+  applyFilter();
+};
+
+export const configFilter = (picturesData)=>{
   filterElement.classList.remove('img-filters--inactive');
   filterElement.addEventListener('click',onFilterChange);
   pictures = picturesData;
-}
+};
 

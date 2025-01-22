@@ -10,22 +10,20 @@ const socialCaption = bigWindow.querySelector('.social__caption');
 const commentsLoader = bigWindow.querySelector('.comments-loader');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
-function closeBigPicture(){
+const closeBigPicture = ()=>{
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
-}
+};
 
-function closeBigPictureEsc(evt){
-  return hasKeyEscape(evt) && closeBigPicture();
-}
+const closeBigPictureEsc = (evt)=>hasKeyEscape(evt) && closeBigPicture();
 
 
-function currentListComments(comments) {
+const currentListComments = (comments)=>{
   let currentIndex = 0;
   const commentsPerPage = 5;
   const totalComments = comments.length;
 
-  function renderComments() {
+  const renderComments = ()=>{
     const currentList = comments.slice(currentIndex, currentIndex + commentsPerPage);
 
     currentList.forEach(({ id, avatar, name, message }) => {
@@ -45,11 +43,11 @@ function currentListComments(comments) {
     } else{
       btnCommentsLoader.style.display = 'block';
     }
-  }
+  };
 
   btnCommentsLoader.addEventListener('click', renderComments);
   renderComments();
-}
+};
 
 
 export const showBigPicture = ({url, description, likes, comments})=>{

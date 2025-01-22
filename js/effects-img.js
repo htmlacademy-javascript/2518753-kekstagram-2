@@ -6,13 +6,13 @@ const effectsContainer = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const imgUploadEffect = document.querySelector('.img-upload__effect-level');
 
-export function defaultEffects () {
+export const defaultEffects = ()=> {
   imgUploadPreview.className = '';
   imgUploadPreview.style = '';
   effectLevelValue.value = '';
   effectsContainer.classList.add(CLASS_NAME_HIDDEN);
   imgUploadEffect.classList.add(CLASS_NAME_HIDDEN);
-}
+};
 
 noUiSlider.create(effectsContainer,{
   range: {

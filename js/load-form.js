@@ -8,16 +8,7 @@ const FILE_TYPES = ['gif','jpg','jpeg','png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
-
-function openUploadImg (){
-  imgUpload.classList.remove(CLASS_NAME_HIDDEN);
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', closeUploadImgEsc);
-  btnImgUploadClose.addEventListener('click',closeUploadImg);
-  defaultEffects();
-}
-
-export function closeUploadImg(){
+export const closeUploadImg = ()=>{
   imgUpload.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
@@ -25,11 +16,17 @@ export function closeUploadImg(){
   resetScale();
   uploadFile.removeEventListener('click',closeUploadImg);
   document.removeEventListener('keydown', closeUploadImg);
-}
+};
+const closeUploadImgEsc = (evt)=>hasKeyEscape(evt) && closeUploadImg();
 
-function closeUploadImgEsc(evt){
-  return hasKeyEscape(evt) && closeUploadImg();
-}
+const openUploadImg = ()=>{
+  imgUpload.classList.remove(CLASS_NAME_HIDDEN);
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', closeUploadImgEsc);
+  btnImgUploadClose.addEventListener('click',closeUploadImg);
+  defaultEffects();
+};
+
 
 uploadFile.addEventListener('change',()=>{
   const file = uploadFile.files[0];
