@@ -7,7 +7,6 @@ const btnWindowCancel = bigWindow.querySelector('.big-picture__cancel');
 const bigWindowTotalComment = bigWindow .querySelector('.social__comment-total-count');
 const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
-const commentsLoader = bigWindow.querySelector('.comments-loader');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
 const closeBigPicture = ()=>{
@@ -52,7 +51,7 @@ const currentListComments = (comments)=>{
 
 export const showBigPicture = ({url, description, likes, comments})=>{
   bigWindow.classList.remove(CLASS_NAME_HIDDEN);
-  commentsLoader.classList.remove(CLASS_NAME_HIDDEN);
+  btnCommentsLoader.classList.remove(CLASS_NAME_HIDDEN);
   bigWindowComments.innerHTML = '';
   bigWindowImg.src = url;
   bigWindowLikes.textContent = likes;
