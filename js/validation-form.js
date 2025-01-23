@@ -1,5 +1,5 @@
 import { sendData } from './api';
-import { onUploadImgClose } from './load-form';
+import { closeUploadImg } from './load-form';
 import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
 
@@ -13,6 +13,10 @@ const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
+export const imgUploadSubmitText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
+};
 
 const disabledButton = (text) => {
   imgUploadSubmit.disabled = true;
@@ -30,15 +34,15 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
 
 });
-let errorMessege = '';
-const error = () => errorMessege;
+let errorMessage = '';
+const error = () => errorMessage;
 export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
 };
 const onEscape = (event) => hasKeyEscape(event) && event.stopPropagation();
 
-function validateHashtags(value) {
+const validateHashtags = (value) => {
   const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
   const uniqueHashtags = new Set();
@@ -108,6 +112,12 @@ imgUploadForm.addEventListener('submit', (event) => {
   }
   disabledButton(IMG_UPLOAD_SUBMIT_TEXT.SENDING);
   return sendData(new FormData(event.target)).then(() => {
+    throw new Error('message?');
+    // enableButton(imgUploadSubmitText.IDLE);
+    // closeUploadImg();
+    // showSuccessMessage();
+    // resetForm();
+  }).catch(() => {
     enableButton(imgUploadSubmitText.IDLE);
     closeUploadImg();
     showSuccessMessage();
