@@ -108,14 +108,10 @@ imgUploadForm.addEventListener('submit', (event) => {
   }
   disabledButton(IMG_UPLOAD_SUBMIT_TEXT.SENDING);
   return sendData(new FormData(event.target)).then(() => {
-    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
-    onUploadImgClose();
+    enableButton(imgUploadSubmitText.IDLE);
+    closeUploadImg();
     showSuccessMessage();
-    resetForm();
-  }).catch(() => {
-    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
-    showErrorImgLoad();
-  });
+  }).catch(showErrorImgLoad);
 
 });
 
