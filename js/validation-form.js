@@ -1,6 +1,6 @@
 import { sendData } from './api';
 import { closeUploadImg } from './load-form';
-import { showSuccessMessage,showErrorImgLoad } from './messages';
+import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
@@ -9,35 +9,35 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
 export const imgUploadSubmitText = {
-  IDLE:'Опубликовать',
-  SENDING:'Сохраняю...',
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
 };
 
-const disabledButton = (text)=>{
+const disabledButton = (text) => {
   imgUploadSubmit.disabled = true;
   imgUploadSubmit.textContent = text;
 };
 
-export const enableButton = (text)=>{
+export const enableButton = (text) => {
   imgUploadSubmit.disabled = false;
   imgUploadSubmit.textContent = text;
 };
 
-const pristine = new Pristine(imgUploadForm,{
-  classTo:'img-upload__field-wrapper',
+const pristine = new Pristine(imgUploadForm, {
+  classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
 
 });
 let errorMessage = '';
-const error = ()=>errorMessage;
-export const resetForm = ()=>{
+const error = () => errorMessage;
+export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
 };
-const onEscape = (event)=>hasKeyEscape(event) && event.stopPropagation();
+const onEscape = (event) => hasKeyEscape(event) && event.stopPropagation();
 
-const validateHashtags = (value) =>{
+const validateHashtags = (value) => {
   const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
   const uniqueHashtags = new Set();
@@ -96,17 +96,16 @@ imgUploadForm.addEventListener('submit', (event) => {
   }
   disabledButton(imgUploadSubmitText.SENDING);
   return sendData(new FormData(event.target)).then(() => {
-    throw new Error('message?');
-    // enableButton(imgUploadSubmitText.IDLE);
-    // closeUploadImg();
-    // showSuccessMessage();
-    // resetForm();
-  }).catch(()=>{
+    enableButton(imgUploadSubmitText.IDLE);
+    closeUploadImg();
+    showSuccessMessage();
+    resetForm();
+  }).catch(() => {
     enableButton(imgUploadSubmitText.IDLE);
     showErrorImgLoad();
   });
 
 });
 
-[hashtagInput,hashtagDescription].forEach((item) => item.addEventListener('keydown',onEscape));
+[hashtagInput, hashtagDescription].forEach((item) => item.addEventListener('keydown', onEscape));
 
