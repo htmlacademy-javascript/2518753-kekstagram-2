@@ -96,10 +96,15 @@ imgUploadForm.addEventListener('submit', (event) => {
   }
   disabledButton(imgUploadSubmitText.SENDING);
   return sendData(new FormData(event.target)).then(() => {
+    throw new Error('message?');
+    // enableButton(imgUploadSubmitText.IDLE);
+    // closeUploadImg();
+    // showSuccessMessage();
+    // resetForm();
+  }).catch(()=>{
     enableButton(imgUploadSubmitText.IDLE);
-    closeUploadImg();
-    showSuccessMessage();
-  }).catch(showErrorImgLoad);
+    showErrorImgLoad();
+  });
 
 });
 
