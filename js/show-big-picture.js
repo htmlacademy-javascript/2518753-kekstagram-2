@@ -1,28 +1,28 @@
-import {CLASS_NAME_HIDDEN,hasKeyEscape} from'./util.js';
+import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 
 const bigWindow = document.querySelector('.big-picture');
-const bigWindowImg = bigWindow .querySelector('.big-picture__img img');
-const bigWindowLikes = bigWindow .querySelector('.likes-count');
+const bigWindowImg = bigWindow.querySelector('.big-picture__img img');
+const bigWindowLikes = bigWindow.querySelector('.likes-count');
 const btnWindowCancel = bigWindow.querySelector('.big-picture__cancel');
-const bigWindowTotalComment = bigWindow .querySelector('.social__comment-total-count');
+const bigWindowTotalComment = bigWindow.querySelector('.social__comment-total-count');
 const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
-const closeBigPicture = ()=>{
+const closeBigPicture = () => {
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
 };
 
-const closeBigPictureEsc = (evt)=>hasKeyEscape(evt) && closeBigPicture();
+const closeBigPictureEsc = (evt) => hasKeyEscape(evt) && closeBigPicture();
 
 
-const currentListComments = (comments)=>{
+const currentListComments = (comments) => {
   let currentIndex = 0;
   const commentsPerPage = 5;
   const totalComments = comments.length;
 
-  const renderComments = ()=>{
+  const renderComments = () => {
     const currentList = comments.slice(currentIndex, currentIndex + commentsPerPage);
 
     currentList.forEach(({ id, avatar, name, message }) => {
@@ -39,7 +39,7 @@ const currentListComments = (comments)=>{
     socialCommentShownCount.textContent = currentIndex;
     if (currentIndex >= totalComments) {
       btnCommentsLoader.style.display = 'none';
-    } else{
+    } else {
       btnCommentsLoader.style.display = 'block';
     }
   };
@@ -49,7 +49,7 @@ const currentListComments = (comments)=>{
 };
 
 
-export const showBigPicture = ({url, description, likes, comments})=>{
+export const showBigPicture = ({ url, description, likes, comments }) => {
   bigWindow.classList.remove(CLASS_NAME_HIDDEN);
   btnCommentsLoader.classList.remove(CLASS_NAME_HIDDEN);
   bigWindowComments.innerHTML = '';
@@ -58,7 +58,7 @@ export const showBigPicture = ({url, description, likes, comments})=>{
   bigWindowTotalComment.textContent = comments.length;
   socialCaption.textContent = description;
   document.body.classList.add('modal-open');
-  currentListComments (comments);
+  currentListComments(comments);
 
   btnWindowCancel.addEventListener('click', closeBigPicture);
   document.addEventListener('keydown', closeBigPictureEsc);

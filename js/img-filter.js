@@ -3,9 +3,9 @@ import { debounce } from './util';
 export let pictures = [];
 
 const FILTER = {
-  Default:'filter-default',
-  Random:'filter-random',
-  Discussed:'filter-discussed',
+  Default: 'filter-default',
+  Random: 'filter-random',
+  Discussed: 'filter-discussed',
 };
 const MAX_COUNT = 10;
 const filterElement = document.querySelector('.img-filters');
@@ -13,29 +13,29 @@ let currentFilter = FILTER.Default;
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 const renderDebounce = debounce(creatPhotos);
 
-const applyFilter = ()=>{
+const applyFilter = () => {
   let filteredPictures = [];
-  switch(currentFilter){
+  switch (currentFilter) {
     case FILTER.Default:
       filteredPictures = pictures;
       break;
 
     case FILTER.Random:
-      filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0,MAX_COUNT);
+      filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_COUNT);
       break;
 
-    case FILTER.Discussed:filteredPictures = pictures.toSorted((a,b)=>b.comments.length - a.comments.length);
+    case FILTER.Discussed: filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
       break;
   }
   renderDebounce(filteredPictures);
 };
-const onFilterChange = (evt)=>{
+const onFilterChange = (evt) => {
   const targetButton = evt.target;
   const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
-  if(!targetButton.matches('button')){
+  if (!targetButton.matches('button')) {
     return;
   }
-  if(activeButton === targetButton){
+  if (activeButton === targetButton) {
     return;
   }
 
@@ -45,9 +45,9 @@ const onFilterChange = (evt)=>{
   applyFilter();
 };
 
-export const configFilter = (picturesData)=>{
+export const configFilter = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
-  filterElement.addEventListener('click',onFilterChange);
+  filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;
 };
 
