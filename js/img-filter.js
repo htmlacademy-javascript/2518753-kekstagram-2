@@ -11,7 +11,7 @@ import { debounce } from './util';
 
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
-export let pictures = [];
+let pictures = [];
 const renderDebounce = debounce(creatPhotos);
 
 const applyFilter = () => {
