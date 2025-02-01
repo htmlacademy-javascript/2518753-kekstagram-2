@@ -1,16 +1,16 @@
 import { creatPhotos } from './create-photos';
 import { debounce } from './util';
-export let pictures = [];
 
+const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+const MAX_COUNT = 10;
 const FILTER = {
   Default: 'filter-default',
   Random: 'filter-random',
   Discussed: 'filter-discussed',
 };
-const MAX_COUNT = 10;
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
-const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+let pictures = [];
 const renderDebounce = debounce(creatPhotos);
 
 const applyFilter = () => {
@@ -45,7 +45,7 @@ const onFilterChange = (evt) => {
   applyFilter();
 };
 
-export const configFilter = (picturesData) => {
+export const setupFilters = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
   filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;
