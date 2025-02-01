@@ -9,29 +9,29 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
-export const closeUploadImg = () => {
+export const onUploadImgClose = () => {
   imgUpload.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
   defaultEffects();
   resetScale();
   resetForm();
-  uploadFile.removeEventListener('click', closeUploadImg);
-  document.removeEventListener('keydown', closeUploadImg);
+  uploadFile.removeEventListener('click', onUploadImgClose);
+  document.removeEventListener('keydown', onUploadImgClose);
 };
-const closeUploadImgEsc = (evt) => {
+const onUploadImgEscPress = (evt) => {
   const isErrorUploadVisible = document.querySelector('.error');
   if (isErrorUploadVisible) {
     return;
   }
-  return hasKeyEscape(evt) && closeUploadImg();
+  return hasKeyEscape(evt) && onUploadImgClose();
 };
 
 const openUploadImg = () => {
   imgUpload.classList.remove(CLASS_NAME_HIDDEN);
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', closeUploadImgEsc);
-  btnImgUploadClose.addEventListener('click', closeUploadImg);
+  document.addEventListener('keydown', onUploadImgEscPress);
+  btnImgUploadClose.addEventListener('click', onUploadImgClose);
   defaultEffects();
 };
 

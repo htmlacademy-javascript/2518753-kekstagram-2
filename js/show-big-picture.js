@@ -15,13 +15,13 @@ const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-
 const resetCommentsCount = () => {
   currentIndex = 0;
 };
-const closeBigPicture = () => {
+const onBigPictureClose = () => {
   resetCommentsCount();
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
 };
 
-const closeBigPictureEsc = (evt) => hasKeyEscape(evt) && closeBigPicture();
+const onBigPictureCloseEsc = (evt) => hasKeyEscape(evt) && onBigPictureClose();
 const createComment = ({ id, avatar, name, message }) => {
   bigWindowComments.insertAdjacentHTML('beforeend', `
     <li class="social__comment" id="comment-${id}">
@@ -57,8 +57,8 @@ export const showBigPicture = ({ url, description, likes, comments }) => {
   pictureComments = comments;
   currentListComments(comments);
 
-  btnWindowCancel.addEventListener('click', closeBigPicture);
-  document.addEventListener('keydown', closeBigPictureEsc);
+  btnWindowCancel.addEventListener('click', onBigPictureClose);
+  document.addEventListener('keydown', onBigPictureCloseEsc);
 
 };
 btnCommentsLoader.addEventListener('click', () => currentListComments(pictureComments));

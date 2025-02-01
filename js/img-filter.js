@@ -45,7 +45,7 @@ const onFilterChange = (evt) => {
   applyFilter();
 };
 
-export const configFilter = (picturesData) => {
+export const getFilteredConfig = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
   filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;
