@@ -30,45 +30,24 @@ const applyFilter = () => {
   renderDebounce(filteredPictures);
 };
 const onFilterChange = (evt) => {
-  function onFilterChange(evt) {
-    const targetButton = evt.target;
-    const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
-    if (!targetButton.matches('button')) {
-      return;
-    }
-    if (activeButton === targetButton) {
-      return;
-    }
-
-    activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-    targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-    currentFilter = targetButton.getAttribute('id');
-    applyFilter();
-  };
-
-  export const configFilter = (picturesData) => {
+  const targetButton = evt.target;
+  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
+  if (!targetButton.matches('button')) {
+    return;
+  }
+  if (activeButton === targetButton) {
+    return;
   }
 
+  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  currentFilter = targetButton.getAttribute('id');
+  applyFilter();
+};
 
-  function applyFilter() {
-    let filteredPictures = [];
-    switch (currentFilter) {
-      case FILTER.Default:
-        filteredPictures = pictures;
-        break;
-
-      case FILTER.Random:
-        filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, MAX_COUNT);
-        break;
-
-      case FILTER.Discussed: filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
-        break;
-    }
-    renderDebounce(filteredPictures);
-  }
-  export function configFilter(picturesData) {
-    filterElement.classList.remove('img-filters--inactive');
-    filterElement.addEventListener('click', onFilterChange);
-    pictures = picturesData;
-  };
+export const setupFilters = (picturesData) => {
+  filterElement.classList.remove('img-filters--inactive');
+  filterElement.addEventListener('click', onFilterChange);
+  pictures = picturesData;
+};
 
