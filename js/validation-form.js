@@ -1,47 +1,47 @@
 import { sendData } from './api';
-import { closeUploadImg } from './load-form';
-import { showSuccessMessage,showErrorImgLoad } from './messages';
+import { onUploadImgClose } from './load-form';
+import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
+
+export const IMG_UPLOAD_SUBMIT_TEXT = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
+};
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
-export const imgUploadSubmitText = {
-  IDLE:'Опубликовать',
-  SENDING:'Сохраняю...',
-};
 
-const disabledButton = (text)=>{
+const disabledButton = (text) => {
   imgUploadSubmit.disabled = true;
   imgUploadSubmit.textContent = text;
 };
 
-export const enableButton = (text)=>{
+export const enableButton = (text) => {
   imgUploadSubmit.disabled = false;
   imgUploadSubmit.textContent = text;
 };
 
-const pristine = new Pristine(imgUploadForm,{
-  classTo:'img-upload__field-wrapper',
+const pristine = new Pristine(imgUploadForm, {
+  classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
 
 });
-let errorMessege = '';
-const error = ()=>errorMessege;
-export const resetForm = ()=>{
+let errorMessage = '';
+const getErrorMessage = () => errorMessage;
+export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
 };
-const onEscape = (event)=>hasKeyEscape(event) && event.stopPropagation();
+const onEscape = (event) => hasKeyEscape(event) && event.stopPropagation();
 
-function validateHashtags(value) {
-  const hashtags = value.split(' ');
-
+const validateHashtags = (value) => {
+  const hashtags = value.trim().split(/\s+/);
   const isValidHashtag = /^#[a-zа-яё0-9()]*\s*$/i;
-  const uniqueHashtags = new Set(hashtags);
+  const uniqueHashtags = new Set();
 
   if (!value.trim()) {
     return true;
@@ -53,27 +53,41 @@ function validateHashtags(value) {
   if (!hashtagInput.pristine.errors) {
     hashtagInput.pristine.errors = [];
   }
+  if (hashtags.some((hashtag) => hashtag.length > 20)) {
+    errorMessage = 'Максимальная длина одного хэш-тега — 20 символов, включая решётку.';
+    hashtagInput.pristine.errors.push(errorMessage);
+    return false;
+  }
 
   if (!hashtags.every((hashtag) => isValidHashtag.test(hashtag))) {
-    errorMessege = 'Один или несколько хештегов не соответствуют допустимому формату.';
+    errorMessage = 'Один или несколько хештегов не соответствуют допустимому формату.';
+    return false;
+  }
+  if (hashtags.some((hashtag) => hashtag === '#')) {
+    errorMessage = 'Хештег не может состоять только из символа #.';
     return false;
   }
 
 
-  if (uniqueHashtags.size !== hashtags.length) {
-    errorMessege = 'Хештеги должны быть уникальными.';
-    return false;
+  for (const hashtag of hashtags) {
+    const lowerCaseHashtag = hashtag.toLowerCase();
+    if (uniqueHashtags.has(lowerCaseHashtag)) {
+      errorMessage = 'Хэш-теги должны быть уникальными.';
+      hashtagInput.pristine.errors.push(errorMessage);
+      return false;
+    }
+    uniqueHashtags.add(lowerCaseHashtag);
   }
 
   if (hashtags.length > 5) {
-    errorMessege = 'Максимальное количество хештегов — 5.';
+    errorMessage = 'Максимальное количество хештегов — 5.';
     return false;
   }
 
   return true;
-}
+};
 
-pristine.addValidator(hashtagInput, validateHashtags, error);
+pristine.addValidator(hashtagInput, validateHashtags, getErrorMessage);
 
 
 imgUploadForm.addEventListener('submit', (event) => {
@@ -81,14 +95,18 @@ imgUploadForm.addEventListener('submit', (event) => {
   if (!pristine.validate()) {
     return;
   }
-  disabledButton(imgUploadSubmitText.SENDING);
+  disabledButton(IMG_UPLOAD_SUBMIT_TEXT.SENDING);
   return sendData(new FormData(event.target)).then(() => {
-    enableButton(imgUploadSubmitText.IDLE);
-    closeUploadImg();
+    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
+    onUploadImgClose();
     showSuccessMessage();
-  }).catch(showErrorImgLoad);
+    resetForm();
+  }).catch(() => {
+    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
+    showErrorImgLoad();
+  });
 
 });
 
-[hashtagInput,hashtagDescription].forEach((item) => item.addEventListener('keydown',onEscape));
+[hashtagInput, hashtagDescription].forEach((item) => item.addEventListener('keydown', onEscape));
 

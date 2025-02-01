@@ -1,15 +1,14 @@
 import { showBigPicture } from './show-big-picture.js';
-import{getData} from'./api.js';
-import { showErrorMessage } from './messages.js';
-
 
 const photoListFragment = document.createDocumentFragment();
 const template = document.querySelector('#picture');
 const picturesContainer = document.querySelector('.pictures');
 
+const clearPhotos = () => picturesContainer.querySelectorAll('a.picture').forEach((item) => item.remove());
 
-getData().then ((similar)=>{
-  similar.forEach(({url, description, likes, comments}) => {
+export const creatPhotos = ((similars) => {
+  clearPhotos();
+  similars.forEach(({ url, description, likes, comments }) => {
     const templateClone = template.content.cloneNode(true);
     const picture = templateClone.querySelector('.picture');
     const img = templateClone.querySelector('.picture__img');
@@ -18,9 +17,9 @@ getData().then ((similar)=>{
     templateClone.querySelector('.picture__likes').textContent = likes;
     templateClone.querySelector('.picture__comments').textContent = comments.length;
     photoListFragment.append(templateClone);
-    picture.addEventListener('click', () =>{
-      showBigPicture({url, description, likes, comments});
+    picture.addEventListener('click', () => {
+      showBigPicture({ url, description, likes, comments });
     });
   });
   picturesContainer.append(photoListFragment);
-}).catch(showErrorMessage);
+});
