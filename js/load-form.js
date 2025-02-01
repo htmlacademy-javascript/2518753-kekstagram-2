@@ -1,11 +1,15 @@
 import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 import { resetScale, imgUploadPreview } from './scale-img.js';
 import { defaultEffects } from './effects-img.js';
+import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
+import { resetScale, imgUploadPreview } from './scale-img.js';
+import { defaultEffects } from './effects-img.js';
 import { resetForm } from './validation-form.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const effectsPreviewImg = document.querySelectorAll('.effects__preview ');
 export const imgUpload = document.querySelector('.img-upload__overlay');
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
@@ -36,6 +40,20 @@ const openUploadImg = () => {
 };
 
 
+uploadFile.addEventListener('change', () => {
+  const file = uploadFile.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    const fileUrl = URL.createObjectURL(file);
+    imgUploadPreview.src = fileUrl;
+    effectsPreviewImg.forEach((img) => {
+      img.style.backgroundImage = `url(${fileUrl})`;
+    });
+    openUploadImg();
+  }
+});
 uploadFile.addEventListener('change', () => {
   const file = uploadFile.files[0];
   const fileName = file.name.toLowerCase();

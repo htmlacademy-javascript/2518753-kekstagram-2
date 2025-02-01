@@ -10,6 +10,7 @@ const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
+<<<<<<< HEAD
 let currentIndex = 0;
 let pictureComments = [];
 
@@ -18,10 +19,14 @@ const resetCommentsCount = () => {
 };
 const onBigPictureClose = () => {
   resetCommentsCount();
+=======
+const closeBigPicture = () => {
+>>>>>>> origin/master
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
 };
 
+<<<<<<< HEAD
 const onBigPictureCloseEsc = (evt) => hasKeyEscape(evt) && onBigPictureClose();
 const createComment = ({ id, avatar, name, message }) => {
   bigWindowComments.insertAdjacentHTML('beforeend', `
@@ -44,6 +49,40 @@ const currentListComments = (comments) => {
   socialCommentShownCount.textContent = currentIndex;
   bigWindowComments.innerHTML = '';
   comments.slice(0, currentIndex).forEach(createComment);
+=======
+const closeBigPictureEsc = (evt) => hasKeyEscape(evt) && closeBigPicture();
+
+
+const currentListComments = (comments) => {
+  let currentIndex = 0;
+  const commentsPerPage = 5;
+  const totalComments = comments.length;
+
+  const renderComments = () => {
+    const currentList = comments.slice(currentIndex, currentIndex + commentsPerPage);
+
+    currentList.forEach(({ id, avatar, name, message }) => {
+      bigWindowComments.insertAdjacentHTML('beforeend', `
+              <li class="social__comment" id="comment-${id}">
+                  <img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35">
+                  <p class="social__text">${message}</p>
+              </li>
+          `);
+    });
+
+    currentIndex += currentList.length;
+
+    socialCommentShownCount.textContent = currentIndex;
+    if (currentIndex >= totalComments) {
+      btnCommentsLoader.style.display = 'none';
+    } else {
+      btnCommentsLoader.style.display = 'block';
+    }
+  };
+
+  btnCommentsLoader.addEventListener('click', renderComments);
+  renderComments();
+>>>>>>> origin/master
 };
 
 
