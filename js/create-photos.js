@@ -1,6 +1,5 @@
 import { showBigPicture } from './show-big-picture.js';
 
-
 const photoListFragment = document.createDocumentFragment();
 const template = document.querySelector('#picture');
 const picturesContainer = document.querySelector('.pictures');

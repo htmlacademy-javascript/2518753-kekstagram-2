@@ -1,4 +1,4 @@
-const SCALE = {
+const Scale = {
   MAX: 100,
   MIN: 25,
   STEP: 25
@@ -8,24 +8,24 @@ const btnBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
 export const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
-const updateScale = (value = SCALE.MAX) => {
+const updateScale = (value = Scale.MAX) => {
   imgUploadPreview.style.transform = `scale(${value / 100})`;
   scaleControlValue.value = `${value}%`;
 };
 const onMinusButtonClick = () => {
   const currentValue = parseFloat(scaleControlValue.value);
-  let newValue = currentValue - SCALE.STEP;
-  if (newValue < SCALE.MIN) {
-    newValue = SCALE.MIN;
+  let newValue = currentValue - Scale.STEP;
+  if (newValue < Scale.MIN) {
+    newValue = Scale.MIN;
   }
   updateScale(newValue);
 };
 
 const onPlusButtonClick = () => {
   const currentValue = parseFloat(scaleControlValue.value);
-  let newValue = currentValue + SCALE.STEP;
-  if (newValue > SCALE.MAX) {
-    newValue = SCALE.MAX;
+  let newValue = currentValue + Scale.STEP;
+  if (newValue > Scale.MAX) {
+    newValue = Scale.MAX;
   }
   updateScale(newValue);
 };

@@ -1,10 +1,9 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 import { resetScale, imgUploadPreview } from './scale-img.js';
 import { defaultEffects } from './effects-img.js';
 import { resetForm } from './validation-form.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const effectsPreviewImg = document.querySelectorAll('.effects__preview ');
 export const imgUpload = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
@@ -20,7 +19,7 @@ export const onUploadImgClose = () => {
   uploadFile.removeEventListener('click', onUploadImgClose);
   document.removeEventListener('keydown', onUploadImgClose);
 };
-const onUploadImgEscPress = (evt) => {
+const onCloseKeydownEscUploadImg = (evt) => {
   const isErrorUploadVisible = document.querySelector('.error');
   if (isErrorUploadVisible) {
     return;
@@ -31,7 +30,7 @@ const onUploadImgEscPress = (evt) => {
 const openUploadImg = () => {
   imgUpload.classList.remove(CLASS_NAME_HIDDEN);
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onUploadImgEscPress);
+  document.addEventListener('keydown', onCloseKeydownEscUploadImg);
   btnImgUploadClose.addEventListener('click', onUploadImgClose);
   defaultEffects();
 };

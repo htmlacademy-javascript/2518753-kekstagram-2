@@ -1,7 +1,6 @@
-const REMOVE_MESSAGE_TIMEOUT = 5000;
-
 import { hasKeyEscape } from './util';
 
+const REMOVE_MESSAGE_TIMEOUT = 5000;
 const messageFragment = document.createDocumentFragment();
 const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const errorMessageElement = errorMessageTemplate.cloneNode(true);

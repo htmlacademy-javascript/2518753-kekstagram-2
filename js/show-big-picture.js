@@ -1,7 +1,6 @@
-const COMMENTS_PER_PAGE = 5;
-
 import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 
+const COMMENTS_PER_PAGE = 5;
 const bigWindow = document.querySelector('.big-picture');
 const bigWindowImg = bigWindow.querySelector('.big-picture__img img');
 const bigWindowLikes = bigWindow.querySelector('.likes-count');

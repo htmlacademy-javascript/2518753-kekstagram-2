@@ -1,13 +1,12 @@
-export const IMG_UPLOAD_SUBMIT_TEXT = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Сохраняю...',
-};
-
 import { sendData } from './api';
 import { onUploadImgClose } from './load-form';
 import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
 
+export const IMG_UPLOAD_SUBMIT_TEXT = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
+};
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgUpLoadText.querySelector('.text__description');
@@ -32,7 +31,7 @@ const pristine = new Pristine(imgUploadForm, {
 
 });
 let errorMessage = '';
-const getError = () => errorMessage;
+const getErrorMessage = () => errorMessage;
 export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
@@ -88,7 +87,7 @@ const validateHashtags = (value) => {
   return true;
 };
 
-pristine.addValidator(hashtagInput, validateHashtags, getError);
+pristine.addValidator(hashtagInput, validateHashtags, getErrorMessage);
 
 
 imgUploadForm.addEventListener('submit', (event) => {
