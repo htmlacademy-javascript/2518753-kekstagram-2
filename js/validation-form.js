@@ -1,17 +1,19 @@
+export const IMG_UPLOAD_SUBMIT_TEXT = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
+};
+
 import { sendData } from './api';
 import { onUploadImgClose } from './load-form';
 import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
+
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
-export const IMG_UPLOAD_SUBMIT_TEXT = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Сохраняю...',
-};
 
 const disabledButton = (text) => {
   imgUploadSubmit.disabled = true;

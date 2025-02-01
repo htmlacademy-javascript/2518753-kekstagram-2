@@ -1,13 +1,12 @@
-const btnSmaller = document.querySelector('.scale__control--smaller');
-const btnBigger = document.querySelector('.scale__control--bigger');
-const scaleControlValue = document.querySelector('.scale__control--value');
-export const imgUploadPreview = document.querySelector('.img-upload__preview img');
-
 const SCALE = {
   MAX: 100,
   MIN: 25,
   STEP: 25
 };
+const btnSmaller = document.querySelector('.scale__control--smaller');
+const btnBigger = document.querySelector('.scale__control--bigger');
+const scaleControlValue = document.querySelector('.scale__control--value');
+export const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
 const updateScale = (value = SCALE.MAX) => {
   imgUploadPreview.style.transform = `scale(${value / 100})`;

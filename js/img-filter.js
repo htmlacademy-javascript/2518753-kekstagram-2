@@ -1,16 +1,17 @@
-import { creatPhotos } from './create-photos';
-import { debounce } from './util';
-export let pictures = [];
-
+const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+const MAX_COUNT = 10;
 const FILTER = {
   Default: 'filter-default',
   Random: 'filter-random',
   Discussed: 'filter-discussed',
 };
-const MAX_COUNT = 10;
+
+import { creatPhotos } from './create-photos';
+import { debounce } from './util';
+
 const filterElement = document.querySelector('.img-filters');
 let currentFilter = FILTER.Default;
-const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+export let pictures = [];
 const renderDebounce = debounce(creatPhotos);
 
 const applyFilter = () => {

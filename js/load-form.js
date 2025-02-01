@@ -1,11 +1,12 @@
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 import { resetScale, imgUploadPreview } from './scale-img.js';
 import { defaultEffects } from './effects-img.js';
 import { resetForm } from './validation-form.js';
-const effectsPreviewImg = document.querySelectorAll('.effects__preview ');
 
+const effectsPreviewImg = document.querySelectorAll('.effects__preview ');
 export const imgUpload = document.querySelector('.img-upload__overlay');
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const uploadFile = document.querySelector('#upload-file');
 const btnImgUploadClose = document.querySelector('#upload-cancel');
 
