@@ -9,9 +9,9 @@ const FILTER = {
   Discussed: 'filter-discussed',
 };
 const filterElement = document.querySelector('.img-filters');
+const renderDebounce = debounce(creatPhotos);
 let currentFilter = FILTER.Default;
 let pictures = [];
-const renderDebounce = debounce(creatPhotos);
 
 const applyFilter = () => {
   let filteredPictures = [];
