@@ -9,23 +9,23 @@ const messageSuccessElement = messageSuccessTemplate.cloneNode(true);
 const errorLoadImgTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorLoadImgElement = errorLoadImgTemplate.cloneNode(true);
 
-export const showErrorMessage = ()=>{
+export const showErrorMessage = () => {
   messageFragment.append(errorMessageElement);
   document.body.appendChild(messageFragment);
   const loadError = document.body.querySelector('.data-error');
-  setTimeout(()=>loadError.remove(),REMOVE_MESSAGE_TIMEOUT);
+  setTimeout(() => loadError.remove(), REMOVE_MESSAGE_TIMEOUT);
 };
 
 
-const removeMessage = (element)=>element.remove();
+const removeMessage = (element) => element.remove();
 
-const removeMessageEsc = (event,element) => {
+const removeMessageEsc = (event, element) => {
   if (hasKeyEscape(event)) {
     removeMessage(element);
   }
 };
 
-export const showSuccessMessage = ()=>{
+export const showSuccessMessage = () => {
   messageFragment.append(messageSuccessElement);
   document.body.appendChild(messageFragment);
   const loadSuccess = document.body.querySelector('.success');
@@ -34,17 +34,17 @@ export const showSuccessMessage = ()=>{
       removeMessage(loadSuccess);
     }
   });
-  document.addEventListener('keydown',(evt)=> removeMessageEsc(evt,loadSuccess));
+  document.addEventListener('keydown', (evt) => removeMessageEsc(evt, loadSuccess));
 };
 
-export const showErrorImgLoad = ()=>{
+export const showErrorImgLoad = () => {
   messageFragment.append(errorLoadImgElement);
   document.body.appendChild(messageFragment);
   const loadErrorImg = document.body.querySelector('.error');
 
-  document.addEventListener('keydown',(evt)=>removeMessageEsc(evt, loadErrorImg));
-  loadErrorImg.addEventListener('click',(evt)=>{
-    if(evt.target.classList.contains('error') || evt.target.classList.contains('error__button')){
+  document.addEventListener('keydown', (evt) => removeMessageEsc(evt, loadErrorImg));
+  loadErrorImg.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('error') || evt.target.classList.contains('error__button')) {
       removeMessage(loadErrorImg);
     }
   });

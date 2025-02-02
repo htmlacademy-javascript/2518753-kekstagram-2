@@ -1,17 +1,18 @@
 import { sendData } from './api';
-import { closeUploadImg } from './load-form';
+import { onUploadImgClose } from './load-form';
 import { showSuccessMessage, showErrorImgLoad } from './messages';
 import { hasKeyEscape } from './util';
+
+export const IMG_UPLOAD_SUBMIT_TEXT = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...',
+};
 const imgUpLoadText = document.querySelector('.img-upload__text');
 const hashtagInput = imgUpLoadText.querySelector('.text__hashtags');
 const hashtagDescription = imgUpLoadText.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.getElementById('upload-submit');
 
-export const imgUploadSubmitText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Сохраняю...',
-};
 
 const disabledButton = (text) => {
   imgUploadSubmit.disabled = true;
@@ -30,7 +31,7 @@ const pristine = new Pristine(imgUploadForm, {
 
 });
 let errorMessage = '';
-const error = () => errorMessage;
+const getErrorMessage = () => errorMessage;
 export const resetForm = () => {
   pristine.reset();
   imgUploadForm.reset();
@@ -86,7 +87,7 @@ const validateHashtags = (value) => {
   return true;
 };
 
-pristine.addValidator(hashtagInput, validateHashtags, error);
+pristine.addValidator(hashtagInput, validateHashtags, getErrorMessage);
 
 
 imgUploadForm.addEventListener('submit', (event) => {
@@ -94,18 +95,17 @@ imgUploadForm.addEventListener('submit', (event) => {
   if (!pristine.validate()) {
     return;
   }
-  disabledButton(imgUploadSubmitText.SENDING);
+  disabledButton(IMG_UPLOAD_SUBMIT_TEXT.SENDING);
   return sendData(new FormData(event.target)).then(() => {
-    enableButton(imgUploadSubmitText.IDLE);
-    closeUploadImg();
+    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
+    onUploadImgClose();
     showSuccessMessage();
     resetForm();
   }).catch(() => {
-    enableButton(imgUploadSubmitText.IDLE);
+    enableButton(IMG_UPLOAD_SUBMIT_TEXT.IDLE);
     showErrorImgLoad();
   });
 
 });
 
 [hashtagInput, hashtagDescription].forEach((item) => item.addEventListener('keydown', onEscape));
-

@@ -1,7 +1,5 @@
 import { CLASS_NAME_HIDDEN, hasKeyEscape } from './util.js';
 
-let currentIndex = 0;
-let pictureComments = [];
 const COMMENTS_PER_PAGE = 5;
 const bigWindow = document.querySelector('.big-picture');
 const bigWindowImg = bigWindow.querySelector('.big-picture__img img');
@@ -12,16 +10,19 @@ const bigWindowComments = bigWindow.querySelector('.social__comments');
 const socialCaption = bigWindow.querySelector('.social__caption');
 const btnCommentsLoader = bigWindow.querySelector('.comments-loader');
 const socialCommentShownCount = bigWindow.querySelector('.social__comment-shown-count');
+let currentIndex = 0;
+let pictureComments = [];
+
 const resetCommentsCount = () => {
   currentIndex = 0;
 };
-const closeBigPicture = () => {
+const onBigPictureClose = () => {
   resetCommentsCount();
   bigWindow.classList.add(CLASS_NAME_HIDDEN);
   document.body.classList.remove('modal-open');
 };
 
-const closeBigPictureEsc = (evt) => hasKeyEscape(evt) && closeBigPicture();
+const onBigPictureCloseEsc = (evt) => hasKeyEscape(evt) && onBigPictureClose();
 const createComment = ({ id, avatar, name, message }) => {
   bigWindowComments.insertAdjacentHTML('beforeend', `
     <li class="social__comment" id="comment-${id}">
@@ -57,8 +58,8 @@ export const showBigPicture = ({ url, description, likes, comments }) => {
   pictureComments = comments;
   currentListComments(comments);
 
-  btnWindowCancel.addEventListener('click', closeBigPicture);
-  document.addEventListener('keydown', closeBigPictureEsc);
+  btnWindowCancel.addEventListener('click', onBigPictureClose);
+  document.addEventListener('keydown', onBigPictureCloseEsc);
 
 };
 btnCommentsLoader.addEventListener('click', () => currentListComments(pictureComments));
