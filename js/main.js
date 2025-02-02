@@ -9,4 +9,3 @@ getData().then((pictures) => {
   creatPhotos(pictures);
   setupFilters(pictures);
 }).catch(showErrorMessage);
-

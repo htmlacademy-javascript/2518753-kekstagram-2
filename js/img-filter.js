@@ -50,4 +50,3 @@ export const setupFilters = (picturesData) => {
   filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;
 };
-
